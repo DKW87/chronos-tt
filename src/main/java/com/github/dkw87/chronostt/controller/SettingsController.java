@@ -1,9 +1,9 @@
-package com.github.dkw87.chronostt;
+package com.github.dkw87.chronostt.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class SettingsController {
     @FXML
     private Label welcomeText;
 

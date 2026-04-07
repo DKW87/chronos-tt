@@ -8,4 +8,6 @@ module com.github.dkw87.chronostt {
 
     opens com.github.dkw87.chronostt to javafx.fxml;
     exports com.github.dkw87.chronostt;
+    exports com.github.dkw87.chronostt.controller;
+    opens com.github.dkw87.chronostt.controller to javafx.fxml;
 }
