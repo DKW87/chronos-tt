@@ -6,6 +6,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.util.StringConverter;
 
 public class SettingsController {
 
@@ -72,6 +73,18 @@ public class SettingsController {
     private void initElementsDefault() {
         daysWeekSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 7, 5));
         hoursDailySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 24, 8));
+
+        timeScaleComboBox.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(TimeScale timeScale) {
+                return timeScale.getDescription();
+            }
+
+            @Override
+            public TimeScale fromString(String string) {
+                return null; // not needed but needs to be overridden
+            }
+        });
         timeScaleComboBox.getItems().setAll(TimeScale.values());
         timeScaleComboBox.setValue(TimeScale.values()[2]);
 
