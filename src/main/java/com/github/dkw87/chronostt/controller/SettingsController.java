@@ -28,6 +28,7 @@ public class SettingsController {
     @FXML
     public void initialize() {
         initElements();
+        setListeners();
     }
 
     @FXML
@@ -87,15 +88,14 @@ public class SettingsController {
         });
         timeScaleComboBox.getItems().setAll(TimeScale.values());
         timeScaleComboBox.setValue(TimeScale.values()[2]);
+    }
 
+    private void setListeners() {
         daysWeekSpinner.focusedProperty().addListener((obs, oldVal, newVal) -> {
             if (!newVal) saveDaysWeek();
         });
         hoursDailySpinner.focusedProperty().addListener((obs, oldVal, newVal) -> {
             if (!newVal) saveHoursDaily();
-        });
-        aggregateProjectHoursCheckBox.focusedProperty().addListener((obs, oldVal, newVal) -> {
-            if (!newVal) saveAggregateProjectHours();
         });
     }
 
