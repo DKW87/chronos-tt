@@ -39,9 +39,9 @@
     </VBox>
 
     <HBox spacing="8" alignment="CENTER_LEFT">
-        <CheckBox fx:id="notifyOverworkCheckBox"
-                  onAction="#saveNotifyOverwork"/>
-        <Label text="Notify on overwork"/>
+        <CheckBox fx:id="notifyOvertimeCheckBox"
+                  onAction="#saveNotifyOvertime"/>
+        <Label text="Notify on overtime"/>
     </HBox>
 
     <HBox spacing="8" alignment="CENTER_LEFT">

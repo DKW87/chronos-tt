@@ -20,7 +20,7 @@ public class SettingsController {
     private ComboBox<TimeScale> timeScaleComboBox;
 
     @FXML
-    private CheckBox notifyOverworkCheckBox;
+    private CheckBox notifyOvertimeCheckBox;
 
     @FXML
     private CheckBox aggregateProjectHoursCheckBox;
@@ -50,8 +50,8 @@ public class SettingsController {
     }
 
     @FXML
-    private void saveNotifyOverwork() {
-        Boolean notifyOverwork = notifyOverworkCheckBox.isSelected();
+    private void saveNotifyOvertime() {
+        Boolean notifyOvertime = notifyOvertimeCheckBox.isSelected();
         // todo: call future service
     }
 
@@ -95,7 +95,7 @@ public class SettingsController {
         daysWeekSpinner.getValueFactory().setValue(5);
         hoursDailySpinner.getValueFactory().setValue(8);
         timeScaleComboBox.setValue(TimeScale.THIRTY_MINUTES);
-        notifyOverworkCheckBox.setSelected(true);
+        notifyOvertimeCheckBox.setSelected(true);
         aggregateProjectHoursCheckBox.setSelected(true);
     }
 
