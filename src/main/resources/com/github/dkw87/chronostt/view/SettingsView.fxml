@@ -7,13 +7,12 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.github.dkw87.chronostt.controller.SettingsController"
-      spacing="16" styleClass="settings-root">
+      spacing="16">
 
     <padding>
         <Insets top="24" right="24" bottom="24" left="24"/>
     </padding>
 
-    <!-- Days per week -->
     <VBox spacing="4">
         <Label text="Days per week"/>
         <Spinner fx:id="daysWeekSpinner"
@@ -23,7 +22,6 @@
                  prefWidth="120"/>
     </VBox>
 
-    <!-- Hours per day -->
     <VBox spacing="4">
         <Label text="Hours per day"/>
         <Spinner fx:id="hoursDailySpinner"
@@ -33,7 +31,6 @@
                  prefWidth="120"/>
     </VBox>
 
-    <!-- Time scale -->
     <VBox spacing="4">
         <Label text="Time scale"/>
         <ComboBox fx:id="timeScaleComboBox"
@@ -41,14 +38,12 @@
                   prefWidth="180"/>
     </VBox>
 
-    <!-- Notify overwork -->
     <HBox spacing="8" alignment="CENTER_LEFT">
         <CheckBox fx:id="notifyOverworkCheckBox"
                   onAction="#saveNotifyOverwork"/>
         <Label text="Notify on overwork"/>
     </HBox>
 
-    <!-- Aggregate project hours -->
     <HBox spacing="8" alignment="CENTER_LEFT">
         <CheckBox fx:id="aggregateProjectHoursCheckBox"
                   onAction="#saveAggregateProjectHours"/>
