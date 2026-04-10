@@ -73,6 +73,7 @@ public class SettingsController {
         daysWeekSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 7, 5));
         hoursDailySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 24, 8));
         timeScaleComboBox.getItems().setAll(TimeScale.values());
+        timeScaleComboBox.setValue(TimeScale.values()[2]);
 
         daysWeekSpinner.focusedProperty().addListener((obs, oldVal, newVal) -> {
             if (!newVal) saveDaysWeek();
