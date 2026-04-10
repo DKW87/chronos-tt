@@ -94,7 +94,7 @@ public class SettingsController {
     private void initElementsDefault() {
         daysWeekSpinner.getValueFactory().setValue(5);
         hoursDailySpinner.getValueFactory().setValue(8);
-        timeScaleComboBox.setValue(TimeScale.values()[2]);
+        timeScaleComboBox.setValue(TimeScale.THIRTY_MINUTES);
         notifyOverworkCheckBox.setSelected(true);
         aggregateProjectHoursCheckBox.setSelected(true);
     }
