@@ -62,9 +62,9 @@ public class SettingsController {
     }
 
     private void initElements() {
-        boolean settingsAvailable = false;
+        setSharedElements();
 
-        setTimeScaleDescriptions();
+        boolean settingsAvailable = false;
 
         if (settingsAvailable) {
             // todo: get and set values from settings
@@ -73,7 +73,10 @@ public class SettingsController {
         }
     }
 
-    private void setTimeScaleDescriptions() {
+    private void setSharedElements() {
+        daysWeekSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 7));
+        hoursDailySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 24));
+
         timeScaleComboBox.setConverter(new StringConverter<>() {
             @Override
             public String toString(TimeScale timeScale) {
@@ -89,8 +92,8 @@ public class SettingsController {
     }
 
     private void initElementsDefault() {
-        daysWeekSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 7, 5));
-        hoursDailySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 24, 8));
+        daysWeekSpinner.getValueFactory().setValue(5);
+        hoursDailySpinner.getValueFactory().setValue(8);
         timeScaleComboBox.setValue(TimeScale.values()[2]);
     }
 
