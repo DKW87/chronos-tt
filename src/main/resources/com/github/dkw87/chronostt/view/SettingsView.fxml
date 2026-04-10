@@ -1,16 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.github.dkw87.chronostt.controller.SettingsController">
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.github.dkw87.chronostt.controller.SettingsController"
+      spacing="16" styleClass="settings-root">
+
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets top="24" right="24" bottom="24" left="24"/>
     </padding>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+    <!-- Days per week -->
+    <VBox spacing="4">
+        <Label text="Days per week"/>
+        <Spinner fx:id="daysWeekSpinner"
+                 min="1" max="7" initialValue="5"
+                 editable="true"
+                 onMouseExited="#saveDaysWeek"
+                 prefWidth="120"/>
+    </VBox>
+
+    <!-- Hours per day -->
+    <VBox spacing="4">
+        <Label text="Hours per day"/>
+        <Spinner fx:id="hoursDailySpinner"
+                 min="1" max="24" initialValue="8"
+                 editable="true"
+                 onMouseExited="#saveHoursDaily"
+                 prefWidth="120"/>
+    </VBox>
+
+    <!-- Time scale -->
+    <VBox spacing="4">
+        <Label text="Time scale"/>
+        <ComboBox fx:id="timeScaleComboBox"
+                  onAction="#saveTimeScale"
+                  prefWidth="180"/>
+    </VBox>
+
+    <!-- Notify overwork -->
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <CheckBox fx:id="notifyOverworkCheckBox"
+                  onAction="#saveNotifyOverwork"/>
+        <Label text="Notify on overwork"/>
+    </HBox>
+
+    <!-- Aggregate project hours -->
+    <HBox spacing="8" alignment="CENTER_LEFT">
+        <CheckBox fx:id="aggregateProjectHoursCheckBox"
+                  onAction="#saveAggregateProjectHours"/>
+        <Label text="Aggregate project hours"/>
+    </HBox>
+
 </VBox>
