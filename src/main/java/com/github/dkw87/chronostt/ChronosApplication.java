@@ -24,4 +24,9 @@ public class ChronosApplication extends Application {
         LOGGER.info("Chronos-TT started.");
     }
 
+    @Override
+    public void stop() throws Exception {
+        LOGGER.info("Chronos-TT stopping...");
+    }
+
 }
