@@ -23,7 +23,9 @@
         <javafx-controls.version>21.0.10</javafx-controls.version>
         <javafx-fxml.version>21.0.10</javafx-fxml.version>
         <junit.version>6.0.3</junit.version>
+        <log4j-slf4j-impl.version>2.25.4</log4j-slf4j-impl.version>
         <lombok.version>1.18.44</lombok.version>
+        <slf4j-api.version>2.0.17</slf4j-api.version>
         <validatorfx.version>0.6.3</validatorfx.version>
     </properties>
 
@@ -75,6 +77,16 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j2-impl</artifactId>
+            <version>${log4j-slf4j-impl.version}</version>
         </dependency>
     </dependencies>
 
