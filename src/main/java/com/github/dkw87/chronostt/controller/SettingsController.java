@@ -104,11 +104,11 @@ public class SettingsController {
     }
 
     private void setListeners() {
-        daysWeekSpinner.focusedProperty().addListener((obs, oldVal, newVal) -> {
-            if (!newVal) saveDaysWeek();
+        daysWeekSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+            if (!Objects.equals(newVal, oldVal)) saveDaysWeek();
         });
-        hoursDailySpinner.focusedProperty().addListener((obs, oldVal, newVal) -> {
-            if (!newVal) saveHoursDaily();
+        hoursDailySpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+            if (!Objects.equals(newVal, oldVal)) saveHoursDaily();
         });
     }
 
