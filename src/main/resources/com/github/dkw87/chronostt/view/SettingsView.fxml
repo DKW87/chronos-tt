@@ -18,7 +18,6 @@
         <Spinner fx:id="daysWeekSpinner"
                  min="1" max="7" initialValue="5"
                  editable="true"
-                 onMouseExited="#saveDaysWeek"
                  prefWidth="120"/>
     </VBox>
 
@@ -27,7 +26,6 @@
         <Spinner fx:id="hoursDailySpinner"
                  min="1" max="24" initialValue="8"
                  editable="true"
-                 onMouseExited="#saveHoursDaily"
                  prefWidth="120"/>
     </VBox>
 
