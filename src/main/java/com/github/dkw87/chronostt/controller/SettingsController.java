@@ -28,7 +28,7 @@ public class SettingsController {
     private CheckBox aggregateProjectHoursCheckBox;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SettingsController.class);
-    private static final Pattern POSITIVE_INT = Pattern.compile("^[1-9]\\d*$|^$");
+    private static final Pattern POSITIVE_INT = Pattern.compile("^[1-9]\\d?$|^$");
 
     @FXML
     public void initialize() {
