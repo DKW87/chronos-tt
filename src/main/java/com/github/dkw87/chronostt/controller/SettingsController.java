@@ -2,10 +2,7 @@ package com.github.dkw87.chronostt.controller;
 
 import com.github.dkw87.chronostt.enumeration.TimeScale;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 import javafx.util.StringConverter;
 
 public class SettingsController {
@@ -75,7 +72,14 @@ public class SettingsController {
 
     private void setSharedElements() {
         daysWeekSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 7));
+        daysWeekSpinner.getEditor().setTextFormatter(
+                new TextFormatter<>(c -> c.getControlNewText().matches("\\d*") ? c : null)
+        );
+
         hoursDailySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 24));
+        hoursDailySpinner.getEditor().setTextFormatter(
+                new TextFormatter<>(c -> c.getControlNewText().matches("\\d*") ? c : null)
+        );
 
         timeScaleComboBox.setConverter(new StringConverter<>() {
             @Override
