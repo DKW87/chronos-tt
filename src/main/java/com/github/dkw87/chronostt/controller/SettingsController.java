@@ -29,6 +29,9 @@ public class SettingsController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SettingsController.class);
     private static final Pattern POSITIVE_INT = Pattern.compile("^[1-9]\\d?$|^$");
+    private static final int MAX_DAYS = 7;
+    private static final int MAX_HOURS = 24;
+    private static final int MIN_VALUE = 1;
 
     @FXML
     public void initialize() {
@@ -79,12 +82,12 @@ public class SettingsController {
     }
 
     private void setSharedElements() {
-        daysWeekSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 7));
+        daysWeekSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_VALUE, MAX_DAYS));
         daysWeekSpinner.getEditor().setTextFormatter(
                 new TextFormatter<>(c -> POSITIVE_INT.matcher(c.getControlNewText()).matches() ? c : null)
         );
 
-        hoursDailySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 24));
+        hoursDailySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_VALUE, MAX_HOURS));
         hoursDailySpinner.getEditor().setTextFormatter(
                 new TextFormatter<>(c -> POSITIVE_INT.matcher(c.getControlNewText()).matches() ? c : null)
         );
@@ -113,9 +116,11 @@ public class SettingsController {
 
     private void setListeners() {
         daysWeekSpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal > MAX_DAYS) return;
             if (!Objects.equals(newVal, oldVal)) saveDaysWeek();
         });
         hoursDailySpinner.valueProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal > MAX_HOURS) return;
             if (!Objects.equals(newVal, oldVal)) saveHoursDaily();
         });
     }
