@@ -32,6 +32,8 @@ public class SettingsController {
     private static final int MAX_DAYS = 7;
     private static final int MAX_HOURS = 24;
     private static final int MIN_VALUE = 1;
+    private static final int DEFAULT_WORKING_DAYS = 5;
+    private static final int DEFAULT_WORKING_HOURS = 8;
 
     @FXML
     public void initialize() {
@@ -107,8 +109,8 @@ public class SettingsController {
     }
 
     private void initElementsDefault() {
-        daysWeekSpinner.getValueFactory().setValue(5);
-        hoursDailySpinner.getValueFactory().setValue(8);
+        daysWeekSpinner.getValueFactory().setValue(DEFAULT_WORKING_DAYS);
+        hoursDailySpinner.getValueFactory().setValue(DEFAULT_WORKING_HOURS);
         timeScaleComboBox.setValue(TimeScale.THIRTY_MINUTES);
         notifyOvertimeCheckBox.setSelected(true);
         aggregateProjectHoursCheckBox.setSelected(true);
