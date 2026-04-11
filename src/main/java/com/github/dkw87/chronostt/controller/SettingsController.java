@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class SettingsController {
 
@@ -27,6 +28,7 @@ public class SettingsController {
     private CheckBox aggregateProjectHoursCheckBox;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SettingsController.class);
+    private static final Pattern POSITIVE_INT = Pattern.compile("^[1-9]\\d*$|^$");
 
     @FXML
     public void initialize() {
@@ -79,12 +81,12 @@ public class SettingsController {
     private void setSharedElements() {
         daysWeekSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 7));
         daysWeekSpinner.getEditor().setTextFormatter(
-                new TextFormatter<>(c -> c.getControlNewText().matches("\\d*") ? c : null)
+                new TextFormatter<>(c -> POSITIVE_INT.matcher(c.getControlNewText()).matches() ? c : null)
         );
 
         hoursDailySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 24));
         hoursDailySpinner.getEditor().setTextFormatter(
-                new TextFormatter<>(c -> c.getControlNewText().matches("\\d*") ? c : null)
+                new TextFormatter<>(c -> POSITIVE_INT.matcher(c.getControlNewText()).matches() ? c : null)
         );
 
         timeScaleComboBox.setConverter(new StringConverter<>() {
