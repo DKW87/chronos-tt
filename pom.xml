@@ -12,19 +12,19 @@
     <properties>
         <!-- Build -->
         <javafx-maven-plugin.version>0.0.8</javafx-maven-plugin.version>
-        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <source.version>21</source.version>
         <target.version>21</target.version>
 
         <!-- Dependencies -->
-        <controlsfx.version>11.2.2</controlsfx.version>
-        <ikonli-javafx.version>12.3.1</ikonli-javafx.version>
-        <javafx-controls.version>21.0.7</javafx-controls.version>
-        <javafx-fxml.version>21.0.7</javafx-fxml.version>
-        <junit.version>5.12.1</junit.version>
+        <controlsfx.version>11.2.3</controlsfx.version>
+        <ikonli-javafx.version>12.4.0</ikonli-javafx.version>
+        <javafx-controls.version>21.0.10</javafx-controls.version>
+        <javafx-fxml.version>21.0.10</javafx-fxml.version>
+        <junit.version>6.0.3</junit.version>
         <lombok.version>1.18.44</lombok.version>
-        <validatorfx.version>0.6.1</validatorfx.version>
+        <validatorfx.version>0.6.3</validatorfx.version>
     </properties>
 
     <dependencies>
