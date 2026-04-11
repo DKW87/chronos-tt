@@ -4,6 +4,10 @@ import com.github.dkw87.chronostt.enumeration.TimeScale;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.StringConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Objects;
 
 public class SettingsController {
 
@@ -22,6 +26,8 @@ public class SettingsController {
     @FXML
     private CheckBox aggregateProjectHoursCheckBox;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SettingsController.class);
+
     @FXML
     public void initialize() {
         initElements();
@@ -31,31 +37,31 @@ public class SettingsController {
     @FXML
     private void saveDaysWeek() {
         Integer days = daysWeekSpinner.getValue();
-        // todo: call future service
+        LOGGER.info("Saving daysWeek({})", days);
     }
 
     @FXML
     private void saveHoursDaily() {
         Integer hours = hoursDailySpinner.getValue();
-        // todo: call future service
+        LOGGER.info("Saving hoursDaily({})", hours);
     }
 
     @FXML
     private void saveTimeScale() {
         TimeScale timeScale = timeScaleComboBox.getValue();
-        // todo: call future service
+        LOGGER.info("Saving timeScale({})", timeScale);
     }
 
     @FXML
     private void saveNotifyOvertime() {
         Boolean notifyOvertime = notifyOvertimeCheckBox.isSelected();
-        // todo: call future service
+        LOGGER.info("Saving notifyOvertime({})", notifyOvertime);
     }
 
     @FXML
     private void saveAggregateProjectHours() {
         Boolean aggregateHours = aggregateProjectHoursCheckBox.isSelected();
-        // todo: call future service
+        LOGGER.info("Saving aggregateProjectHours({})", aggregateHours);
     }
 
     private void initElements() {
