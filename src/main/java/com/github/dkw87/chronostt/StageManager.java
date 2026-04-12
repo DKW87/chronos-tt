@@ -29,6 +29,7 @@ public class StageManager {
         settingsStage.setWidth(250);
         settingsStage.setHeight(320);
         settingsStage.setTitle("Chronos-TT: Settings");
+        LOGGER.info("SettingsStage constructed");
     }
 
     private void constructTrackingStage() {
@@ -38,6 +39,7 @@ public class StageManager {
         trackingStage.setHeight(50);
         trackingStage.setAlwaysOnTop(true);
         trackingStage.setTitle("Chronos-TT: Tracking Time...");
+        LOGGER.info("TrackingStage constructed");
     }
 
     private FXMLLoader getScene(String fxml, Stage stage) {
