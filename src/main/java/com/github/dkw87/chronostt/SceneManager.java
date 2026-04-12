@@ -34,9 +34,18 @@ public class SceneManager {
         }
     }
 
-    public static SceneManager getInstance() {
-        if (instance == null) throw new IllegalStateException("SceneManager not initialized");
-        return instance;
+    public void showSettingsView() {
+        LOGGER.info("Switching to SettingsView");
+        getScene("view/SettingsView.fxml");
+        primaryStage.setWidth(250);
+        primaryStage.setHeight(320);
+        primaryStage.setAlwaysOnTop(false);
+    }
+
+    public void showTrackingView() {
+        LOGGER.info("Switching to TrackingView");
+        getScene("view/TrackingView.fxml");
+        primaryStage.setAlwaysOnTop(true);
     }
 
 }
