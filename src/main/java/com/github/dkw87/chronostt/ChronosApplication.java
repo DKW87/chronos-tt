@@ -13,7 +13,6 @@ public class ChronosApplication extends Application {
 
     @Override
     public void start(Stage stage) {
-        LOGGER.info("Chronos-TT starting...");
         STAGE_MANAGER.showSettingsView();
         LOGGER.info("Chronos-TT started.");
     }
