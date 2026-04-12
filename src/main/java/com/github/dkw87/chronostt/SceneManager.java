@@ -13,16 +13,10 @@ public class SceneManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SceneManager.class);
 
-    private static SceneManager instance;
-    private final Stage stage;
+    private final Stage primaryStage;
 
-    private SceneManager(Stage stage) {
-        this.stage = stage;
-    }
-
-    public static void initialize(Stage stage) {
-        LOGGER.info("Initializing Scene Manager...");
-        instance = new SceneManager(stage);
+    public SceneManager(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 
     public FXMLLoader getScene(String fxml) {
@@ -32,7 +26,7 @@ public class SceneManager {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             Parent root = loader.load();
             scene = new Scene(root);
-            stage.setScene(scene);
+            primaryStage.setScene(scene);
             return loader;
         } catch (IOException ioException) {
             ioException.printStackTrace();
