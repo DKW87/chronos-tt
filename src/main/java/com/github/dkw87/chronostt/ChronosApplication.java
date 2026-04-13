@@ -9,11 +9,10 @@ import org.slf4j.LoggerFactory;
 public class ChronosApplication extends Application {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ChronosApplication.class);
-    private static final StageManager STAGE_MANAGER = StageManager.getInstance();
 
     @Override
     public void start(Stage stage) {
-        STAGE_MANAGER.showSettingsView();
+        StageManager.getInstance().showSettingsView();
         LOGGER.info("Chronos-TT started.");
     }
 
