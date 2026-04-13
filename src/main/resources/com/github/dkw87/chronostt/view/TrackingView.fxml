@@ -7,7 +7,7 @@
 <HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.github.dkw87.chronostt.controller.TrackingController"
-      spacing="8" alignment="CENTER_LEFT">
+      spacing="8" alignment="CENTER_LEFT" fx:id="root">
 
     <padding>
         <Insets top="12" right="12" bottom="12" left="12"/>
