@@ -1,6 +1,7 @@
 package com.github.dkw87.chronostt.controller;
 
 import com.github.dkw87.chronostt.enumeration.TimeScale;
+import com.github.dkw87.chronostt.model.Project;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.StringConverter;
@@ -11,6 +12,9 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class SettingsController {
+
+    @FXML
+    public ComboBox<Project> projectComboBox;
 
     @FXML
     private Spinner<Integer> daysWeekSpinner;
