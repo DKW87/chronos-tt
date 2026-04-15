@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
@@ -15,8 +16,7 @@
 
     <ComboBox fx:id="projectComboBox" prefWidth="160"/>
     <ProgressIndicator prefWidth="24" prefHeight="24" progress="-1"/>
-    <StackPane minWidth="20" maxWidth="20" minHeight="20" maxHeight="20" onMouseClicked="#stopTracking">
-        <Region style="-fx-background-color: red; -fx-background-radius: 5"/>
-    </StackPane>
+    <FontIcon iconLiteral="bi-stop-fill" iconSize="32" iconColor="red" onMouseClicked="#stopTracking"/>
+
 
 </HBox>
