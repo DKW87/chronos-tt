@@ -29,7 +29,8 @@ public class StageManager {
         settingsStage.initStyle(StageStyle.DECORATED);
         getScene("view/SettingsView.fxml",  settingsStage);
         settingsStage.setWidth(250);
-        settingsStage.setHeight(320);
+        settingsStage.setHeight(375);
+        settingsStage.setResizable(false);
         settingsStage.setTitle("Chronos-TT: Settings");
         LOGGER.info("SettingsStage constructed");
     }
