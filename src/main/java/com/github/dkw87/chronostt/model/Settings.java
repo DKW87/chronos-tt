@@ -12,6 +12,7 @@ public class Settings {
 
     Integer daysWeek;
     Integer hoursDaily;
+    Project lastSelectedProject;
     TimeScale timeScale;
     Boolean notifyOvertime;
     Boolean aggregateProjectHours;
