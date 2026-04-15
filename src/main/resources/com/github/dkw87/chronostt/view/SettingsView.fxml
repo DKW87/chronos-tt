@@ -16,10 +16,16 @@
 
     <VBox spacing="4">
         <HBox alignment="CENTER" spacing="8">
-            <FontIcon iconLiteral="bi-card-list" iconSize="24" iconColor="dimgrey"/>
+            <FontIcon iconLiteral="bi-file-ppt-fill"
+                      iconSize="20"
+                      iconColor="blue"
+                      onMouseClicked="#manageProjectsView"/>
             <ComboBox fx:id="projectComboBox"
-                      prefWidth="140"/>
-            <FontIcon iconLiteral="bi-play-fill" iconSize="32" iconColor="green"/>
+                      prefWidth="160"/>
+            <FontIcon iconLiteral="bi-play-fill"
+                      iconSize="32"
+                      iconColor="green"
+                      onMouseClicked="#startTracking"/>
         </HBox>
     </VBox>
 
