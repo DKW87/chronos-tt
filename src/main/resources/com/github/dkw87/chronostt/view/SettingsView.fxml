@@ -18,7 +18,7 @@
         <Spinner fx:id="daysWeekSpinner"
                  min="1" max="7" initialValue="5"
                  editable="true"
-                 prefWidth="140"/>
+                 prefWidth="190"/>
     </VBox>
 
     <VBox spacing="4">
@@ -26,14 +26,14 @@
         <Spinner fx:id="hoursDailySpinner"
                  min="1" max="24" initialValue="8"
                  editable="true"
-                 prefWidth="140"/>
+                 prefWidth="190"/>
     </VBox>
 
     <VBox spacing="4">
         <Label text="Time scale"/>
         <ComboBox fx:id="timeScaleComboBox"
                   onAction="#saveTimeScale"
-                  prefWidth="140"/>
+                  prefWidth="190"/>
     </VBox>
 
     <HBox spacing="8" alignment="CENTER_LEFT">
