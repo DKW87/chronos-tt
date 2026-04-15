@@ -19,6 +19,7 @@
 
         <!-- Dependencies -->
         <controlsfx.version>11.2.3</controlsfx.version>
+        <ikonli-bootstrapicons-pack.version>12.4.0</ikonli-bootstrapicons-pack.version>
         <ikonli-javafx.version>12.4.0</ikonli-javafx.version>
         <javafx-controls.version>21.0.10</javafx-controls.version>
         <javafx-fxml.version>21.0.10</javafx-fxml.version>
@@ -87,6 +88,11 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j2-impl</artifactId>
             <version>${log4j-slf4j-impl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-bootstrapicons-pack</artifactId>
+            <version>${ikonli-bootstrapicons-pack.version}</version>
         </dependency>
     </dependencies>
 
