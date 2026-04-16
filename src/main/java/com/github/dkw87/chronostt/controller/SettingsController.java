@@ -1,5 +1,6 @@
 package com.github.dkw87.chronostt.controller;
 
+import com.github.dkw87.chronostt.StageManager;
 import com.github.dkw87.chronostt.enumeration.TimeScale;
 import com.github.dkw87.chronostt.model.Project;
 import javafx.fxml.FXML;
@@ -130,5 +131,11 @@ public class SettingsController {
             if (!Objects.equals(newVal, oldVal)) saveHoursDaily();
         });
     }
+
+    public void startTracking() {
+        StageManager.getInstance().showTrackingView();
+    }
+
+    public void manageProjectsView() {}
 
 }

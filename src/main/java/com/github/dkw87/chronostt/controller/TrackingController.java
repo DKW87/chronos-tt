@@ -34,6 +34,8 @@ public class TrackingController {
     }
 
     @FXML
-    public void stopTracking() {}
+    public void stopTracking() {
+        StageManager.getInstance().showSettingsView();
+    }
 
 }
