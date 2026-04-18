@@ -115,6 +115,26 @@ public class MemoryRepository {
         }
     }
 
+    public void submitAllDays(List<DayEntry> allDays) {
+        queue.add(() -> {
+            lock.writeLock().lock();
+            try {
+                this.allDays = allDays;
+            }   finally {
+                lock.writeLock().unlock();
+            }
+        });
+    }
+
+    public List<DayEntry> getAllDays() {
+        lock.readLock().lock();
+        try {
+            return allDays;
+        }   finally {
+            lock.readLock().unlock();
+        }
+    }
+
     public void stop() {
         LOG.info("MemoryRepository shutting down...");
         queue.add(SHUTDOWN_TASK);
