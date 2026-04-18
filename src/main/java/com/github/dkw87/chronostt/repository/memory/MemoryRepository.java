@@ -95,6 +95,26 @@ public class MemoryRepository {
         }
     }
 
+    public void submitToday(DayEntry today) {
+        queue.add(() -> {
+            lock.writeLock().lock();
+            try {
+                this.today = today;
+            }  finally {
+                lock.writeLock().unlock();
+            }
+        });
+    }
+
+    public DayEntry getToday() {
+        lock.readLock().lock();
+        try {
+            return today;
+        }  finally {
+            lock.readLock().unlock();
+        }
+    }
+
     public void stop() {
         LOG.info("MemoryRepository shutting down...");
         queue.add(SHUTDOWN_TASK);
