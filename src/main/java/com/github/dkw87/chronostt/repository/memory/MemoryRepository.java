@@ -7,18 +7,63 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class MemoryRepository {
 
     private static final Logger LOG = LoggerFactory.getLogger(MemoryRepository.class);
-    private final ReadWriteLock lock = new ReentrantReadWriteLock();
+    private static final Runnable SHUTDOWN_TASK = () -> {};
 
-    private volatile Settings settings;
-    private volatile List<Project> projects;
-    private volatile DayEntry today;
-    private volatile List<DayEntry> allDays;
+    private final ReadWriteLock lock;
+    private final BlockingQueue<Runnable> queue;
+
+    private Settings settings;
+    private List<Project> projects;
+    private DayEntry today;
+    private List<DayEntry> allDays;
+
+    private MemoryRepository() {
+        LOG.info("Initializing MemoryRepository...");
+        lock = new ReentrantReadWriteLock();
+        queue = new LinkedBlockingQueue<>();
+        start();
+    }
+
+    private void start() {
+        Thread memoryRepositoryThread = new Thread(() -> {
+            LOG.info("MemoryRepositoryThread started");
+            while (true) {
+                try {
+                    Runnable task = queue.take();
+                    if (task == SHUTDOWN_TASK) {
+                        LOG.info("MemoryRepositoryThread completed all queued tasks");
+                        shutdown();
+                        break;
+                    }
+                    task.run();
+                } catch (InterruptedException e) {
+                    LOG.warn("MemoryRepositoryThread interrupted", e);
+                    Thread.currentThread().interrupt();
+                    break;
+                }
+            }
+        }, "MemoryRepositoryThread");
+        memoryRepositoryThread.setDaemon(true);
+        memoryRepositoryThread.start();
+    }
+
+    public void stop() {
+        LOG.info("MemoryRepository shutting down...");
+        queue.add(SHUTDOWN_TASK);
+    }
+
+    private void shutdown() {
+        LOG.info("MemoryRepository has stopped");
+        // maybe add some final writing to disk using StorageRepository
+    }
 
     public static MemoryRepository getInstance() {
         return MemoryRepository.SingletonHolder.INSTANCE;
@@ -27,5 +72,5 @@ public class MemoryRepository {
     private static class SingletonHolder {
         private static final MemoryRepository INSTANCE = new MemoryRepository();
     }
-    
+
 }
