@@ -40,7 +40,10 @@ public class MemoryRepository {
                 try {
                     Runnable task = queue.take();
 
-                    if (task == SHUTDOWN_TASK) break;
+                    if (task == SHUTDOWN_TASK) {
+                        LOG.info("MemoryRepositoryThread completed all queued tasks");
+                        break;
+                    }
 
                     task.run();
                 } catch (InterruptedException e) {
@@ -49,7 +52,6 @@ public class MemoryRepository {
                     break;
                 }
             }
-            LOG.info("MemoryRepositoryThread completed all queued tasks");
             shutdown();
         }, "MemoryRepositoryThread");
         memoryRepositoryThread.setDaemon(true);
