@@ -47,7 +47,7 @@ public class MemoryRepository {
 
                     task.run();
                 } catch (InterruptedException e) {
-                    LOG.warn("MemoryRepositoryThread interrupted", e);
+                    LOG.warn("MemoryRepositoryThread interrupted, {} tasks left in queue ", queue.size(), e);
                     Thread.currentThread().interrupt();
                     break;
                 }
