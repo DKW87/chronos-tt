@@ -21,6 +21,7 @@
         <controlsfx.version>11.2.3</controlsfx.version>
         <ikonli-bootstrapicons-pack.version>12.4.0</ikonli-bootstrapicons-pack.version>
         <ikonli-javafx.version>12.4.0</ikonli-javafx.version>
+        <jackson.version>2.21.2</jackson.version>
         <javafx-controls.version>21.0.10</javafx-controls.version>
         <javafx-fxml.version>21.0.10</javafx-fxml.version>
         <junit.version>6.0.3</junit.version>
@@ -93,6 +94,11 @@
             <groupId>org.kordamp.ikonli</groupId>
             <artifactId>ikonli-bootstrapicons-pack</artifactId>
             <version>${ikonli-bootstrapicons-pack.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
     </dependencies>
 
