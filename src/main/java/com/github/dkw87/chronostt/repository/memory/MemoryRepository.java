@@ -15,7 +15,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class MemoryRepository {
 
     private static final Logger LOG = LoggerFactory.getLogger(MemoryRepository.class);
-    private static final Runnable SHUTDOWN_TASK = () -> {};
+    private static final Runnable SHUTDOWN_TASK = () -> {
+    };
 
     private final ReadWriteLock lock;
     private final BlockingQueue<Runnable> queue;
@@ -90,7 +91,7 @@ public class MemoryRepository {
         lock.readLock().lock();
         try {
             return projects;
-        }  finally {
+        } finally {
             lock.readLock().unlock();
         }
     }
@@ -100,7 +101,7 @@ public class MemoryRepository {
             lock.writeLock().lock();
             try {
                 this.today = today;
-            }  finally {
+            } finally {
                 lock.writeLock().unlock();
             }
         });
@@ -110,7 +111,7 @@ public class MemoryRepository {
         lock.readLock().lock();
         try {
             return today;
-        }  finally {
+        } finally {
             lock.readLock().unlock();
         }
     }
@@ -120,7 +121,7 @@ public class MemoryRepository {
             lock.writeLock().lock();
             try {
                 this.allDays = allDays;
-            }   finally {
+            } finally {
                 lock.writeLock().unlock();
             }
         });
@@ -130,7 +131,7 @@ public class MemoryRepository {
         lock.readLock().lock();
         try {
             return allDays;
-        }   finally {
+        } finally {
             lock.readLock().unlock();
         }
     }
