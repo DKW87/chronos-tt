@@ -55,6 +55,26 @@ public class MemoryRepository {
         memoryRepositoryThread.start();
     }
 
+    public void submitSettings(Settings settings) {
+        queue.add(() -> {
+            lock.writeLock().lock();
+            try {
+                this.settings = settings;
+            } finally {
+                lock.writeLock().unlock();
+            }
+        });
+    }
+
+    public Settings getSettings() {
+        lock.readLock().lock();
+        try {
+            return settings;
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
+
     public void stop() {
         LOG.info("MemoryRepository shutting down...");
         queue.add(SHUTDOWN_TASK);
