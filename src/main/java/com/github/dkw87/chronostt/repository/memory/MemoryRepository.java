@@ -75,6 +75,26 @@ public class MemoryRepository {
         }
     }
 
+    public void submitProjects(List<Project> projects) {
+        queue.add(() -> {
+            lock.writeLock().lock();
+            try {
+                this.projects = projects;
+            } finally {
+                lock.writeLock().unlock();
+            }
+        });
+    }
+
+    public List<Project> getProjects() {
+        lock.readLock().lock();
+        try {
+            return projects;
+        }  finally {
+            lock.readLock().unlock();
+        }
+    }
+
     public void stop() {
         LOG.info("MemoryRepository shutting down...");
         queue.add(SHUTDOWN_TASK);
