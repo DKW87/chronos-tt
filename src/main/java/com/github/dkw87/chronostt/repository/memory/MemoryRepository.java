@@ -15,8 +15,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class MemoryRepository {
 
     private static final Logger LOG = LoggerFactory.getLogger(MemoryRepository.class);
-    private static final Runnable SHUTDOWN_TASK = () -> {
-    };
+    private static final Runnable SHUTDOWN_TASK = () -> {};
+    private static final String THREAD_NAME = "MemoryRepositoryThread";
 
     private final ReadWriteLock lock;
     private final BlockingQueue<Runnable> queue;
@@ -35,25 +35,25 @@ public class MemoryRepository {
 
     private void start() {
         Thread memoryRepositoryThread = new Thread(() -> {
-            LOG.info("MemoryRepositoryThread started");
+            LOG.info("{} started", THREAD_NAME);
             while (true) {
                 try {
                     Runnable task = queue.take();
 
                     if (task == SHUTDOWN_TASK) {
-                        LOG.info("MemoryRepositoryThread completed all queued tasks");
+                        LOG.info("{} completed all queued tasks", THREAD_NAME);
                         break;
                     }
 
                     task.run();
                 } catch (InterruptedException e) {
-                    LOG.warn("MemoryRepositoryThread interrupted, {} tasks left in queue ", queue.size(), e);
+                    LOG.warn("{} interrupted, {} tasks left in queue ", THREAD_NAME, queue.size(), e);
                     Thread.currentThread().interrupt();
                     break;
                 }
             }
             shutdown();
-        }, "MemoryRepositoryThread");
+        }, THREAD_NAME);
         memoryRepositoryThread.setDaemon(true);
         memoryRepositoryThread.start();
     }
