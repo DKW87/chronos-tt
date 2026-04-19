@@ -7,6 +7,8 @@ module com.github.dkw87.chronostt {
     requires org.kordamp.ikonli.javafx;
     requires static lombok;
     requires org.slf4j;
+    requires com.fasterxml.jackson.datatype.jsr310;
+    requires com.fasterxml.jackson.databind;
 
     opens com.github.dkw87.chronostt to javafx.fxml;
     exports com.github.dkw87.chronostt;
