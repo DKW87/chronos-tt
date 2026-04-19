@@ -3,13 +3,14 @@ package com.github.dkw87.chronostt.repository.storage;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.github.dkw87.chronostt.enumeration.TimeScale;
+import com.github.dkw87.chronostt.model.Settings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -70,6 +71,33 @@ public class StorageRepository {
         }, THREAD_NAME);
         storageRepositoryThread.setDaemon(true);
         storageRepositoryThread.start();
+    }
+
+    public Settings getSettings() {
+        Settings settings = null;
+        try {
+            settings = objectMapper.readValue(PATH.resolve(SETTINGS_FILE).toFile(), Settings.class);
+        } catch (IOException e) {
+            LOG.error("Unable to deserialize settings", e);
+        }
+
+        if (settings != null) {
+            LOG.info("{} successfully loaded", SETTINGS_FILE);
+            return settings;
+        }
+
+        LOG.info("No {} found, initializing first time defaults...", SETTINGS_FILE);
+        settings = Settings.builder()
+                .daysWeek(5)
+                .hoursDaily(8)
+                .timeScale(TimeScale.THIRTY_MINUTES)
+                .notifyOvertime(false)
+                .aggregateProjectHours(true)
+                .build();
+
+        // save after creating defaults for next run
+
+        return settings;
     }
 
     public void stop() {
