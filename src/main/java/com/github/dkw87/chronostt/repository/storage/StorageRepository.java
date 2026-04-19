@@ -6,6 +6,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.concurrent.BlockingQueue;
@@ -19,7 +21,7 @@ public class StorageRepository {
 
     private static final String USER_HOME = System.getProperty("user.home");
     private static final String APP_DIR = ".chronos-tt";
-    private static final Path PATH = Paths.get(USER_HOME, APP_DIR);
+    private static final Path PATH = Path.of(USER_HOME, APP_DIR);
     private static final String SETTINGS_FILE = "chronos-settings.json";
     private static final String PROJECTS_FILE = "chronos-projects.json";
     private static final String TRACKING_FILE = "chronos-tracking.json";
@@ -29,10 +31,19 @@ public class StorageRepository {
     
     private StorageRepository(){
         LOG.info("Initializing StorageRepository...");
+        createAppDir();
         queue = new LinkedBlockingQueue<>();
         objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         start();
+    }
+
+    private void createAppDir() {
+        try {
+            Files.createDirectories(PATH);
+        } catch (IOException e) {
+            LOG.error("Unable to create application directory", e);
+        }
     }
 
     private void start() {
