@@ -3,6 +3,7 @@ package com.github.dkw87.chronostt.repository.storage;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.github.dkw87.chronostt.enumeration.SaveMethod;
 import com.github.dkw87.chronostt.enumeration.TimeScale;
 import com.github.dkw87.chronostt.model.Settings;
 import org.slf4j.Logger;
@@ -87,7 +88,7 @@ public class StorageRepository {
                     .notifyOvertime(false)
                     .aggregateProjectHours(true)
                     .build();
-            saveSettings(settings);
+            saveSettings(settings, SaveMethod.SYNCHRONOUS);
             return settings;
         }
 
@@ -106,17 +107,23 @@ public class StorageRepository {
         return null;
     }
 
-    public void saveSettings(Settings settings) {
-        queue.add(() -> {
-            LOG.info("Saving {}...", SETTINGS_FILE);
-            final File file = PATH.resolve(SETTINGS_FILE).toFile();
-            try {
-                objectMapper.writeValue(file, settings);
-            } catch (IOException e) {
-                LOG.error("Unable to serialize settings", e);
-            }
-            LOG.info("Successfully saved {}", SETTINGS_FILE);
-        });
+    public void saveSettings(Settings settings, SaveMethod method) {
+        if (method == SaveMethod.ASYNCHRONOUS) {
+            queue.add(() -> persistSettings(settings));
+            return;
+        }
+        persistSettings(settings);
+    }
+
+    private void persistSettings(Settings settings) {
+        LOG.info("Saving {}...", SETTINGS_FILE);
+        final File file = PATH.resolve(SETTINGS_FILE).toFile();
+        try {
+            objectMapper.writeValue(file, settings);
+        } catch (IOException e) {
+            LOG.error("Unable to serialize settings", e);
+        }
+        LOG.info("Successfully saved {}", SETTINGS_FILE);
     }
 
     public void stop() {
