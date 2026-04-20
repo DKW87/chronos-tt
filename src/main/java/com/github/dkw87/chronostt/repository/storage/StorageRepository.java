@@ -158,6 +158,25 @@ public class StorageRepository {
         return null;
     }
 
+    public void saveProjects(List<Project> projects, SaveMethod method) {
+        if (method == SaveMethod.ASYNCHRONOUS) {
+            queue.add(() -> persistProjects(projects));
+            return;
+        }
+        persistProjects(projects);
+    }
+
+    private void persistProjects(List<Project> projects) {
+        LOG.info("Saving {}...", PROJECTS_FILE);
+        final File file = PATH.resolve(PROJECTS_FILE).toFile();
+        try {
+            objectMapper.writeValue(file, projects);
+        } catch (IOException e) {
+            LOG.error("Unable to serialize projects", e);
+        }
+        LOG.info("Successfully saved {}", PROJECTS_FILE);
+    }
+
     public void stop() {
         LOG.info("StorageRepository shutting down...");
         queue.add(SHUTDOWN_TASK);
