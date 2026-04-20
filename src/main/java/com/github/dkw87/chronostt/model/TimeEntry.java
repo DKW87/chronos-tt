@@ -1,14 +1,14 @@
 package com.github.dkw87.chronostt.model;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
+@Builder
 @Getter
 @Setter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class TimeEntry {
 
     Long id;

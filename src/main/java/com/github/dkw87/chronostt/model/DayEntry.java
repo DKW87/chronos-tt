@@ -1,15 +1,15 @@
 package com.github.dkw87.chronostt.model;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Builder
 @Getter
 @Setter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class DayEntry {
 
     Long id;

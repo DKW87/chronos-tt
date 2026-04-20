@@ -1,14 +1,12 @@
 package com.github.dkw87.chronostt.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Builder
 @Getter
 @Setter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class Project {
 
     Long id;

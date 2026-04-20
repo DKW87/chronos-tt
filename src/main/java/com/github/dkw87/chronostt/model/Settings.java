@@ -1,15 +1,13 @@
 package com.github.dkw87.chronostt.model;
 
 import com.github.dkw87.chronostt.enumeration.TimeScale;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Builder
 @Getter
 @Setter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class Settings {
 
     Integer daysWeek;
