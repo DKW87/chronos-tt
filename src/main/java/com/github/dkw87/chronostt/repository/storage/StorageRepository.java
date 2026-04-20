@@ -8,6 +8,7 @@ import com.github.dkw87.chronostt.model.Settings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -74,9 +75,24 @@ public class StorageRepository {
     }
 
     public Settings getSettings() {
+        final File file = PATH.resolve(SETTINGS_FILE).toFile();
         Settings settings = null;
+
+        if (!file.exists()) {
+            LOG.warn("{} does not exist, returning default values", SETTINGS_FILE);
+            settings = Settings.builder()
+                    .daysWeek(5)
+                    .hoursDaily(8)
+                    .timeScale(TimeScale.THIRTY_MINUTES)
+                    .notifyOvertime(false)
+                    .aggregateProjectHours(true)
+                    .build();
+            // save defaults to disk
+            return settings;
+        }
+
         try {
-            settings = objectMapper.readValue(PATH.resolve(SETTINGS_FILE).toFile(), Settings.class);
+            settings = objectMapper.readValue(file, Settings.class);
         } catch (IOException e) {
             LOG.error("Unable to deserialize settings", e);
         }
@@ -86,18 +102,8 @@ public class StorageRepository {
             return settings;
         }
 
-        LOG.info("No {} found, initializing first time defaults...", SETTINGS_FILE);
-        settings = Settings.builder()
-                .daysWeek(5)
-                .hoursDaily(8)
-                .timeScale(TimeScale.THIRTY_MINUTES)
-                .notifyOvertime(false)
-                .aggregateProjectHours(true)
-                .build();
-
-        // save after creating defaults for next run
-
-        return settings;
+        LOG.error("Unable to load or provide {}, returning null", SETTINGS_FILE);
+        return null;
     }
 
     public void stop() {
