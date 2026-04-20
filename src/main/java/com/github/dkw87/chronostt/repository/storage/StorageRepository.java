@@ -106,6 +106,19 @@ public class StorageRepository {
         return null;
     }
 
+    public void saveSettings(Settings settings) {
+        queue.add(() -> {
+            LOG.info("Saving {}...", SETTINGS_FILE);
+            final File file = PATH.resolve(SETTINGS_FILE).toFile();
+            try {
+                objectMapper.writeValue(file, settings);
+            } catch (IOException e) {
+                LOG.error("Unable to serialize settings", e);
+            }
+            LOG.info("Successfully saved {}", SETTINGS_FILE);
+        });
+    }
+
     public void stop() {
         LOG.info("StorageRepository shutting down...");
         queue.add(SHUTDOWN_TASK);
