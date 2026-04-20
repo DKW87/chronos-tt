@@ -1,10 +1,12 @@
 package com.github.dkw87.chronostt.repository.storage;
 
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.github.dkw87.chronostt.enumeration.SaveMethod;
 import com.github.dkw87.chronostt.enumeration.TimeScale;
+import com.github.dkw87.chronostt.model.Project;
 import com.github.dkw87.chronostt.model.Settings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -124,6 +128,34 @@ public class StorageRepository {
             LOG.error("Unable to serialize settings", e);
         }
         LOG.info("Successfully saved {}", SETTINGS_FILE);
+    }
+
+    public List<Project> getProjects() {
+        final File file = PATH.resolve(PROJECTS_FILE).toFile();
+        List<Project> projects = new ArrayList<>();
+
+        if (!file.exists()) {
+            LOG.warn("{} does not exist, returning default values", PROJECTS_FILE);
+            projects = List.of(
+                    Project.builder().id(1L).name("CHANGE-ME").afasCode("").build()
+            );
+            saveProjects(projects, SaveMethod.SYNCHRONOUS);
+            return projects;
+        }
+
+        try {
+            projects = objectMapper.readValue(file, new TypeReference<>() {});
+        } catch (IOException e) {
+            LOG.error("Unable to deserialize projects", e);
+        }
+
+        if (!projects.isEmpty()) {
+            LOG.info("{} successfully loaded", PROJECTS_FILE);
+            return projects;
+        }
+
+        LOG.error("Unable to load or provide {}, returning empty list", PROJECTS_FILE);
+        return null;
     }
 
     public void stop() {
