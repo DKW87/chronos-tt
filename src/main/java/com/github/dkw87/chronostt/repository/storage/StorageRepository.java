@@ -87,7 +87,7 @@ public class StorageRepository {
                     .notifyOvertime(false)
                     .aggregateProjectHours(true)
                     .build();
-            // save defaults to disk
+            saveSettings(settings);
             return settings;
         }
 
