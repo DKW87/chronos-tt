@@ -80,7 +80,7 @@ public class StorageRepository {
         storageRepositoryThread.start();
     }
 
-    public Settings getSettings() {
+    public Settings loadSettings() {
         LOG.info("Loading settings...");
         final File file = PATH.resolve(SETTINGS_FILE).toFile();
         Settings settings = null;
@@ -132,7 +132,7 @@ public class StorageRepository {
         }
     }
 
-    public List<Project> getProjects() {
+    public List<Project> loadProjects() {
         LOG.info("Loading projects...");
         final File file = PATH.resolve(PROJECTS_FILE).toFile();
         List<Project> projects = new ArrayList<>();
@@ -180,7 +180,7 @@ public class StorageRepository {
         }
     }
 
-    public List<DayEntry> getTrackedDays() {
+    public List<DayEntry> loadTrackedDays() {
         LOG.info("Loading tracked days...");
         final File file = PATH.resolve(TRACKED_DAYS_FILE).toFile();
         List<DayEntry> days = new ArrayList<>();
