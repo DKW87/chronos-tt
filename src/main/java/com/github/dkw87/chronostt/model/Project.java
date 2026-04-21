@@ -15,4 +15,14 @@ public class Project {
     Boolean billable;
     Boolean deleted;
 
+    public static Project defaultProject() {
+        return Project.builder()
+                .id(1L)
+                .name("CHANGE-ME")
+                .afasCode("")
+                .billable(false)
+                .deleted(false)
+                .build();
+    }
+
 }
