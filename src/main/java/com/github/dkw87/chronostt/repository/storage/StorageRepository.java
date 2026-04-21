@@ -202,6 +202,24 @@ public class StorageRepository {
         return null;
     }
 
+    private void saveTrackedDays(List<DayEntry> days, SaveMethod method) {
+        if  (method == SaveMethod.ASYNCHRONOUS) {
+            queue.add(() -> persistTrackedDays(days));
+        }
+        persistTrackedDays(days);
+    }
+
+    private void persistTrackedDays(List<DayEntry> days) {
+        LOG.info("Saving {}...", TRACKED_DAYS_FILE);
+        final File file = PATH.resolve(TRACKED_DAYS_FILE).toFile();
+        try {
+            objectMapper.writeValue(file, days);
+        } catch (IOException e) {
+            LOG.error("Unable to deserialize tracked days", e);
+        }
+        LOG.info("Successfully saved {}", TRACKED_DAYS_FILE);
+    }
+
     public void stop() {
         LOG.info("StorageRepository shutting down...");
         queue.add(SHUTDOWN_TASK);
