@@ -15,7 +15,7 @@ public class Project {
     Boolean billable;
     Boolean deleted;
 
-    public static Project defaultProject() {
+    public static Project defaults() {
         return Project.builder()
                 .id(1L)
                 .name("CHANGE-ME")
