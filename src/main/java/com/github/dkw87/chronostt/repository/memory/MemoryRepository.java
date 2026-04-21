@@ -156,6 +156,11 @@ public class MemoryRepository {
         // maybe add some final writing to disk using StorageRepository
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void initialize() {
+        getInstance();
+    }
+
     public static MemoryRepository getInstance() {
         return MemoryRepository.SingletonHolder.INSTANCE;
     }
