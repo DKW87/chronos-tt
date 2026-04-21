@@ -125,10 +125,10 @@ public class StorageRepository {
         final File file = PATH.resolve(SETTINGS_FILE).toFile();
         try {
             objectMapper.writeValue(file, settings);
+            LOG.info("Successfully saved {}", SETTINGS_FILE);
         } catch (IOException e) {
             LOG.error("Unable to serialize settings", e);
         }
-        LOG.info("Successfully saved {}", SETTINGS_FILE);
     }
 
     public List<Project> getProjects() {
@@ -172,10 +172,10 @@ public class StorageRepository {
         final File file = PATH.resolve(PROJECTS_FILE).toFile();
         try {
             objectMapper.writeValue(file, projects);
+            LOG.info("Successfully saved {}", PROJECTS_FILE);
         } catch (IOException e) {
             LOG.error("Unable to serialize projects", e);
         }
-        LOG.info("Successfully saved {}", PROJECTS_FILE);
     }
 
     public List<DayEntry> getTrackedDays() {
@@ -214,10 +214,10 @@ public class StorageRepository {
         final File file = PATH.resolve(TRACKED_DAYS_FILE).toFile();
         try {
             objectMapper.writeValue(file, days);
+            LOG.info("Successfully saved {}", TRACKED_DAYS_FILE);
         } catch (IOException e) {
             LOG.error("Unable to deserialize tracked days", e);
         }
-        LOG.info("Successfully saved {}", TRACKED_DAYS_FILE);
     }
 
     public void stop() {
