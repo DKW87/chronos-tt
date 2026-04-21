@@ -108,7 +108,7 @@ public class StorageRepository {
             return settings;
         }
 
-        LOG.error("Unable to load or provide {}, returning null", SETTINGS_FILE);
+        LOG.error("Unable to load {} or provide defaults, returning null", SETTINGS_FILE);
         return null;
     }
 
@@ -155,7 +155,7 @@ public class StorageRepository {
             return projects;
         }
 
-        LOG.error("Unable to load or provide {}, returning empty list", PROJECTS_FILE);
+        LOG.error("Unable to load {} or provide defaults, returning empty list", PROJECTS_FILE);
         return null;
     }
 
