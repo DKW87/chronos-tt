@@ -3,6 +3,7 @@ package com.github.dkw87.chronostt.repository.memory;
 import com.github.dkw87.chronostt.model.DayEntry;
 import com.github.dkw87.chronostt.model.Project;
 import com.github.dkw87.chronostt.model.Settings;
+import com.github.dkw87.chronostt.repository.storage.StorageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +31,14 @@ public class MemoryRepository {
         LOG.info("Initializing MemoryRepository...");
         lock = new ReentrantReadWriteLock();
         queue = new LinkedBlockingQueue<>();
+        loadSavedData();
         start();
+    }
+
+    private void loadSavedData() {
+        settings = StorageRepository.getInstance().loadSettings();
+        projects = StorageRepository.getInstance().loadProjects();
+        trackedDays = StorageRepository.getInstance().loadTrackedDays();
     }
 
     private void start() {
