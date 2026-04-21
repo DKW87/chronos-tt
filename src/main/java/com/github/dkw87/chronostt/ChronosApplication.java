@@ -1,5 +1,6 @@
 package com.github.dkw87.chronostt;
 
+import com.github.dkw87.chronostt.repository.memory.MemoryRepository;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ public class ChronosApplication extends Application {
 
     @Override
     public void start(Stage stage) {
+        MemoryRepository.initialize();
         StageManager.getInstance().showSettingsView();
         LOGGER.info("Chronos-TT started.");
     }
