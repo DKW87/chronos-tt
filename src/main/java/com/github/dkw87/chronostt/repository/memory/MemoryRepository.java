@@ -24,7 +24,7 @@ public class MemoryRepository {
     private Settings settings;
     private List<Project> projects;
     private DayEntry today;
-    private List<DayEntry> allDays;
+    private List<DayEntry> trackedDays;
 
     private MemoryRepository() {
         LOG.info("Initializing MemoryRepository...");
@@ -118,21 +118,21 @@ public class MemoryRepository {
         }
     }
 
-    public void submitAllDays(List<DayEntry> allDays) {
+    public void submitAllDays(List<DayEntry> trackedDays) {
         queue.add(() -> {
             lock.writeLock().lock();
             try {
-                this.allDays = allDays;
+                this.trackedDays = trackedDays;
             } finally {
                 lock.writeLock().unlock();
             }
         });
     }
 
-    public List<DayEntry> getAllDays() {
+    public List<DayEntry> getTrackedDays() {
         lock.readLock().lock();
         try {
-            return allDays;
+            return trackedDays;
         } finally {
             lock.readLock().unlock();
         }
