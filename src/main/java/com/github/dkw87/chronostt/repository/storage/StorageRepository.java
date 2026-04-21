@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.github.dkw87.chronostt.enumeration.SaveMethod;
 import com.github.dkw87.chronostt.enumeration.TimeScale;
+import com.github.dkw87.chronostt.model.DayEntry;
 import com.github.dkw87.chronostt.model.Project;
 import com.github.dkw87.chronostt.model.Settings;
 import org.slf4j.Logger;
@@ -31,7 +32,7 @@ public class StorageRepository {
     private static final Path PATH = Path.of(USER_HOME, APP_DIR);
     private static final String SETTINGS_FILE = "chronos-settings.json";
     private static final String PROJECTS_FILE = "chronos-projects.json";
-    private static final String TRACKING_FILE = "chronos-tracking.json";
+    private static final String TRACKED_DAYS_FILE = "chronos-tracked-days.json";
 
     private final BlockingQueue<Runnable> queue;
     private final ObjectMapper objectMapper;
@@ -175,6 +176,30 @@ public class StorageRepository {
             LOG.error("Unable to serialize projects", e);
         }
         LOG.info("Successfully saved {}", PROJECTS_FILE);
+    }
+
+    public List<DayEntry> getTrackedDays() {
+        final File file = PATH.resolve(TRACKED_DAYS_FILE).toFile();
+        List<DayEntry> days = new ArrayList<>();
+
+        if (!file.exists()) {
+            LOG.warn("{} does not exist, returning empty list", TRACKED_DAYS_FILE);
+            return days;
+        }
+
+        try {
+            days = objectMapper.readValue(file, new TypeReference<>() {});
+        } catch (IOException e) {
+            LOG.error("Unable to deserialize tracked days", e);
+        }
+
+        if (!days.isEmpty()) {
+            LOG.info("{} successfully loaded", TRACKED_DAYS_FILE);
+            return days;
+        }
+
+        LOG.error("Unable to load {}, returning empty list", TRACKED_DAYS_FILE);
+        return null;
     }
 
     public void stop() {
