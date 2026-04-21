@@ -12,6 +12,7 @@ module com.github.dkw87.chronostt {
 
     opens com.github.dkw87.chronostt to javafx.fxml;
     opens com.github.dkw87.chronostt.model to com.fasterxml.jackson.databind;
+    opens com.github.dkw87.chronostt.enumeration to com.fasterxml.jackson.databind;
     exports com.github.dkw87.chronostt;
     exports com.github.dkw87.chronostt.controller;
     opens com.github.dkw87.chronostt.controller to javafx.fxml;
