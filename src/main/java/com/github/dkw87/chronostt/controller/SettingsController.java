@@ -33,7 +33,7 @@ public class SettingsController {
     @FXML
     private CheckBox aggregateProjectHoursCheckBox;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SettingsController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(SettingsController.class);
     private static final Pattern POSITIVE_INT = Pattern.compile("^[1-9]\\d?$|^$");
     private static final int MAX_DAYS = 7;
     private static final int MAX_HOURS = 24;
@@ -50,31 +50,31 @@ public class SettingsController {
     @FXML
     private void saveDaysWeek() {
         Integer days = daysWeekSpinner.getValue();
-        LOGGER.info("Saving daysWeek({})", days);
+        LOG.info("Saving daysWeek({})", days);
     }
 
     @FXML
     private void saveHoursDaily() {
         Integer hours = hoursDailySpinner.getValue();
-        LOGGER.info("Saving hoursDaily({})", hours);
+        LOG.info("Saving hoursDaily({})", hours);
     }
 
     @FXML
     private void saveTimeScale() {
         TimeScale timeScale = timeScaleComboBox.getValue();
-        LOGGER.info("Saving timeScale({})", timeScale);
+        LOG.info("Saving timeScale({})", timeScale);
     }
 
     @FXML
     private void saveNotifyOvertime() {
         Boolean notifyOvertime = notifyOvertimeCheckBox.isSelected();
-        LOGGER.info("Saving notifyOvertime({})", notifyOvertime);
+        LOG.info("Saving notifyOvertime({})", notifyOvertime);
     }
 
     @FXML
     private void saveAggregateProjectHours() {
         Boolean aggregateHours = aggregateProjectHoursCheckBox.isSelected();
-        LOGGER.info("Saving aggregateProjectHours({})", aggregateHours);
+        LOG.info("Saving aggregateProjectHours({})", aggregateHours);
     }
 
     private void initElements() {

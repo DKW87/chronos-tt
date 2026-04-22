@@ -14,13 +14,13 @@ import java.io.IOException;
 @Getter
 public class StageManager {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(StageManager.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StageManager.class);
 
     private final Stage settingsStage = new Stage();
     private final Stage trackingStage = new Stage();
 
     private StageManager() {
-        LOGGER.info("Constructing stages...");
+        LOG.info("Constructing stages...");
         constructSettingsStage();
         constructTrackingStage();
     }
@@ -32,7 +32,7 @@ public class StageManager {
         settingsStage.setHeight(410);
         settingsStage.setResizable(false);
         settingsStage.setTitle("Chronos-TT: Settings");
-        LOGGER.info("SettingsStage constructed");
+        LOG.info("SettingsStage constructed");
     }
 
     private void constructTrackingStage() {
@@ -42,7 +42,7 @@ public class StageManager {
         trackingStage.setHeight(50);
         trackingStage.setAlwaysOnTop(true);
         trackingStage.setTitle("Chronos-TT: Tracking Time...");
-        LOGGER.info("TrackingStage constructed");
+        LOG.info("TrackingStage constructed");
     }
 
     private FXMLLoader getScene(String fxml, Stage stage) {
@@ -60,13 +60,13 @@ public class StageManager {
     }
 
     public void showSettingsView() {
-        LOGGER.info("Switching to SettingsView");
+        LOG.info("Switching to SettingsView");
         trackingStage.hide();
         settingsStage.show();
     }
 
     public void showTrackingView() {
-        LOGGER.info("Switching to TrackingView");
+        LOG.info("Switching to TrackingView");
         settingsStage.hide();
         trackingStage.show();
     }

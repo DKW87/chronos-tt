@@ -9,18 +9,18 @@ import org.slf4j.LoggerFactory;
 
 public class ChronosApplication extends Application {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ChronosApplication.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ChronosApplication.class);
 
     @Override
     public void start(Stage stage) {
         MemoryRepository.initialize();
         StageManager.getInstance().showSettingsView();
-        LOGGER.info("Chronos-TT started.");
+        LOG.info("Chronos-TT started.");
     }
 
     @Override
     public void stop() {
-        LOGGER.info("Chronos-TT stopping...");
+        LOG.info("Chronos-TT stopping...");
     }
 
 }
