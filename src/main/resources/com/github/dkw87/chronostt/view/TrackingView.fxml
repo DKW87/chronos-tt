@@ -16,7 +16,7 @@
 
     <ComboBox fx:id="projectComboBox" prefWidth="160"/>
     <ProgressIndicator prefWidth="24" prefHeight="24" progress="-1"/>
-    <FontIcon iconLiteral="bi-stop-fill" iconSize="32" iconColor="red" onMouseClicked="#stopTracking"/>
+    <FontIcon iconLiteral="mdi2s-stop" iconSize="32" iconColor="red" onMouseClicked="#stopTracking"/>
 
 
 </HBox>

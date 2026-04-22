@@ -16,13 +16,13 @@
 
     <VBox spacing="4">
         <HBox alignment="CENTER" spacing="8">
-            <FontIcon iconLiteral="bi-list-task"
+            <FontIcon iconLiteral="mdi2p-playlist-edit"
                       iconSize="24"
                       iconColor="grey"
                       onMouseClicked="#manageProjectsView"/>
             <ComboBox fx:id="projectComboBox"
                       prefWidth="160"/>
-            <FontIcon iconLiteral="bi-play-fill"
+            <FontIcon iconLiteral="mdi2p-play"
                       iconSize="32"
                       iconColor="green"
                       onMouseClicked="#startTracking"/>
