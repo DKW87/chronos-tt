@@ -15,6 +15,10 @@ import java.io.IOException;
 public class StageManager {
 
     private static final Logger LOG = LoggerFactory.getLogger(StageManager.class);
+    private static final int SETTINGS_STAGE_WIDTH = 250;
+    private static final int SETTINGS_STAGE_HEIGHT = 410;
+    private static final int TRACKING_STAGE_WIDTH = 250;
+    private static final int TRACKING_STAGE_HEIGHT = 50;
 
     private final Stage settingsStage = new Stage();
     private final Stage trackingStage = new Stage();
@@ -28,8 +32,8 @@ public class StageManager {
     private void constructSettingsStage() {
         settingsStage.initStyle(StageStyle.DECORATED);
         getScene("view/SettingsView.fxml",  settingsStage);
-        settingsStage.setWidth(250);
-        settingsStage.setHeight(410);
+        settingsStage.setWidth(SETTINGS_STAGE_WIDTH);
+        settingsStage.setHeight(SETTINGS_STAGE_HEIGHT);
         settingsStage.setResizable(false);
         settingsStage.setTitle("Chronos-TT: Settings");
         LOG.info("SettingsStage constructed");
@@ -38,8 +42,8 @@ public class StageManager {
     private void constructTrackingStage() {
         trackingStage.initStyle(StageStyle.UNDECORATED);
         getScene("view/TrackingView.fxml",  trackingStage);
-        trackingStage.setWidth(250);
-        trackingStage.setHeight(50);
+        trackingStage.setWidth(TRACKING_STAGE_WIDTH);
+        trackingStage.setHeight(TRACKING_STAGE_HEIGHT);
         trackingStage.setAlwaysOnTop(true);
         trackingStage.setTitle("Chronos-TT: Tracking Time...");
         LOG.info("TrackingStage constructed");
