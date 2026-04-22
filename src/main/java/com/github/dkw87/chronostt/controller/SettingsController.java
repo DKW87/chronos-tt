@@ -5,6 +5,7 @@ import com.github.dkw87.chronostt.enumeration.TimeScale;
 import com.github.dkw87.chronostt.model.Project;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.util.StringConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -138,4 +139,5 @@ public class SettingsController {
 
     public void manageProjectsView() {}
 
+    public void showTrackedDaysChart() {}
 }
