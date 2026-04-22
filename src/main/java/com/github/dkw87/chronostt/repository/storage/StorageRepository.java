@@ -87,13 +87,7 @@ public class StorageRepository {
 
         if (!file.exists()) {
             LOG.warn("{} does not exist, returning default values", SETTINGS_FILE);
-            settings = Settings.builder()
-                    .daysWeek(5)
-                    .hoursDaily(8)
-                    .timeScale(TimeScale.THIRTY_MINUTES)
-                    .notifyOvertime(false)
-                    .aggregateProjectHours(true)
-                    .build();
+            settings = Settings.defaults();
             saveSettings(settings, SaveMethod.SYNCHRONOUS);
             return settings;
         }
@@ -139,9 +133,7 @@ public class StorageRepository {
 
         if (!file.exists()) {
             LOG.warn("{} does not exist, returning default values", PROJECTS_FILE);
-            projects = List.of(
-                    Project.builder().id(1L).name("CHANGE-ME").afasCode("").build()
-            );
+            projects = List.of(Project.defaults());
             saveProjects(projects, SaveMethod.SYNCHRONOUS);
             return projects;
         }
