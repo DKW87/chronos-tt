@@ -101,14 +101,20 @@ public class SettingsController {
     }
 
     private void initDaysWeekSpinner() {
-        daysWeekSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_VALUE, MAX_DAYS));
+        final int daysWeek = DataService.getInstance().getDaysWeek();
+        daysWeekSpinner.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_VALUE, MAX_DAYS, daysWeek)
+        );
         daysWeekSpinner.getEditor().setTextFormatter(
                 new TextFormatter<>(c -> POSITIVE_INT.matcher(c.getControlNewText()).matches() ? c : null)
         );
     }
 
     private void initHoursDailySpinner() {
-        hoursDailySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_VALUE, MAX_HOURS));
+        final int hoursDaily = DataService.getInstance().getHoursDaily();
+        hoursDailySpinner.setValueFactory(
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_VALUE, MAX_HOURS, hoursDaily)
+        );
         hoursDailySpinner.getEditor().setTextFormatter(
                 new TextFormatter<>(c -> POSITIVE_INT.matcher(c.getControlNewText()).matches() ? c : null)
         );
