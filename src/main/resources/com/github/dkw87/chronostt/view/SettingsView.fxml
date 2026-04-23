@@ -27,7 +27,7 @@
         <Region HBox.hgrow="ALWAYS"/>
         <FontIcon iconLiteral="mdi2c-chart-bar-stacked"
                   iconSize="32"
-                  iconColor="mediumpurple"
+                  iconColor="grey"
                   onMouseClicked="#showTrackedDaysChart"/>
         <Region HBox.hgrow="ALWAYS"/>
         <FontIcon iconLiteral="mdi2p-play"
