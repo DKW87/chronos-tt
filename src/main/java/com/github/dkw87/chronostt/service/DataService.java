@@ -15,6 +15,14 @@ public class DataService {
         return MemoryRepository.getInstance().getProjects();
     }
 
+    public int getDaysWeek() {
+        return MemoryRepository.getInstance().getSettings().getDaysWeek();
+    }
+
+    public int getHoursDaily() {
+        return MemoryRepository.getInstance().getSettings().getHoursDaily();
+    }
+
     public static DataService getInstance() {
         return DataService.SingletonHolder.INSTANCE;
     }
