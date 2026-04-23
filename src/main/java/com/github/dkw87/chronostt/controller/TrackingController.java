@@ -38,4 +38,6 @@ public class TrackingController {
         StageManager.getInstance().showSettingsView();
     }
 
+    public void manageProjectsView() {
+    }
 }
