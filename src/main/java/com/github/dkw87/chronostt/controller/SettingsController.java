@@ -118,6 +118,7 @@ public class SettingsController {
         timeScaleComboBox.setConverter(new StringConverter<>() {
             @Override
             public String toString(TimeScale timeScale) {
+                if (timeScale == null) return "";
                 return timeScale.getDescription();
             }
 
