@@ -3,6 +3,7 @@ package com.github.dkw87.chronostt.controller;
 import com.github.dkw87.chronostt.StageManager;
 import com.github.dkw87.chronostt.enumeration.TimeScale;
 import com.github.dkw87.chronostt.model.Project;
+import com.github.dkw87.chronostt.service.DataService;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.StringConverter;
@@ -111,6 +112,20 @@ public class SettingsController {
             }
         });
         timeScaleComboBox.getItems().setAll(TimeScale.values());
+
+        projectComboBox.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Project project) {
+                if (project == null) return "";
+                return project.getName();
+            }
+
+            @Override
+            public Project fromString(String string) {
+                return null;
+            }
+        });
+        projectComboBox.getItems().setAll(DataService.getInstance().getProjects());
     }
 
     private void initElementsDefault() {
