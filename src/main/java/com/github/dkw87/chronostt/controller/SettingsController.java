@@ -134,14 +134,19 @@ public class SettingsController {
             }
         });
         timeScaleComboBox.getItems().setAll(TimeScale.values());
+        timeScaleComboBox.setValue(DataService.getInstance().getTimeScale());
     }
 
     private void initNotifyOvertimeCheckBox() {
-        notifyOvertimeCheckBox.setSelected(true);
+        notifyOvertimeCheckBox.setSelected(
+                DataService.getInstance().getNotifyOvertime()
+        );
     }
 
     private void initAggregateProjectHoursCheckBox() {
-        aggregateProjectHoursCheckBox.setSelected(true);
+        aggregateProjectHoursCheckBox.setSelected(
+                DataService.getInstance().getAggragateProjectHours()
+        );
     }
 
     private void setListeners() {
