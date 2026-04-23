@@ -78,41 +78,15 @@ public class SettingsController {
     }
 
     private void initElements() {
-        setSharedElements();
-
-        boolean settingsAvailable = false;
-
-        if (settingsAvailable) {
-            // todo: get and set values from settings
-        } else {
-            initElementsDefault();
-        }
+        initProjectComboBox();
+        initDaysWeekSpinner();
+        initHoursDailySpinner();
+        initTimeScaleComboBox();
+        initNotifyOvertimeCheckBox();
+        initAggregateProjectHoursCheckBox();
     }
 
-    private void setSharedElements() {
-        daysWeekSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_VALUE, MAX_DAYS));
-        daysWeekSpinner.getEditor().setTextFormatter(
-                new TextFormatter<>(c -> POSITIVE_INT.matcher(c.getControlNewText()).matches() ? c : null)
-        );
-
-        hoursDailySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_VALUE, MAX_HOURS));
-        hoursDailySpinner.getEditor().setTextFormatter(
-                new TextFormatter<>(c -> POSITIVE_INT.matcher(c.getControlNewText()).matches() ? c : null)
-        );
-
-        timeScaleComboBox.setConverter(new StringConverter<>() {
-            @Override
-            public String toString(TimeScale timeScale) {
-                return timeScale.getDescription();
-            }
-
-            @Override
-            public TimeScale fromString(String string) {
-                return null; // not needed but needs to be overridden
-            }
-        });
-        timeScaleComboBox.getItems().setAll(TimeScale.values());
-
+    private void initProjectComboBox() {
         projectComboBox.setConverter(new StringConverter<>() {
             @Override
             public String toString(Project project) {
@@ -122,17 +96,46 @@ public class SettingsController {
 
             @Override
             public Project fromString(String string) {
-                return null;
+                return null; // not used
             }
         });
         projectComboBox.getItems().setAll(DataService.getInstance().getProjects());
     }
 
-    private void initElementsDefault() {
-        daysWeekSpinner.getValueFactory().setValue(DEFAULT_WORKING_DAYS);
-        hoursDailySpinner.getValueFactory().setValue(DEFAULT_WORKING_HOURS);
-        timeScaleComboBox.setValue(TimeScale.THIRTY_MINUTES);
+    private void initDaysWeekSpinner() {
+        daysWeekSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_VALUE, MAX_DAYS));
+        daysWeekSpinner.getEditor().setTextFormatter(
+                new TextFormatter<>(c -> POSITIVE_INT.matcher(c.getControlNewText()).matches() ? c : null)
+        );
+    }
+
+    private void initHoursDailySpinner() {
+        hoursDailySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_VALUE, MAX_HOURS));
+        hoursDailySpinner.getEditor().setTextFormatter(
+                new TextFormatter<>(c -> POSITIVE_INT.matcher(c.getControlNewText()).matches() ? c : null)
+        );
+    }
+
+    private void initTimeScaleComboBox() {
+        timeScaleComboBox.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(TimeScale timeScale) {
+                return timeScale.getDescription();
+            }
+
+            @Override
+            public TimeScale fromString(String string) {
+                return null; // not used
+            }
+        });
+        timeScaleComboBox.getItems().setAll(TimeScale.values());
+    }
+
+    private void initNotifyOvertimeCheckBox() {
         notifyOvertimeCheckBox.setSelected(true);
+    }
+
+    private void initAggregateProjectHoursCheckBox() {
         aggregateProjectHoursCheckBox.setSelected(true);
     }
 
