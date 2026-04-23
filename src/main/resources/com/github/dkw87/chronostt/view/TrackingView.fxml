@@ -14,9 +14,19 @@
         <Insets top="12" right="12" bottom="12" left="12"/>
     </padding>
 
-    <ComboBox fx:id="projectComboBox" prefWidth="160"/>
-    <ProgressIndicator prefWidth="24" prefHeight="24" progress="-1"/>
-    <FontIcon iconLiteral="mdi2s-stop" iconSize="36" iconColor="red" onMouseClicked="#stopTracking"/>
+    <FontIcon iconLiteral="mdi2p-playlist-edit"
+              iconSize="32"
+              iconColor="grey"
+              onMouseClicked="#manageProjectsView"/>
+    <ComboBox fx:id="projectComboBox"
+              prefWidth="160"/>
+    <ProgressIndicator prefWidth="24"
+                       prefHeight="24"
+                       progress="-1"/>
+    <FontIcon iconLiteral="mdi2s-stop"
+              iconSize="36"
+              iconColor="red"
+              onMouseClicked="#stopTracking"/>
 
 
 </HBox>
