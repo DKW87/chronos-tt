@@ -38,8 +38,6 @@ public class SettingsController {
     private static final int MAX_DAYS = 7;
     private static final int MAX_HOURS = 24;
     private static final int MIN_VALUE = 1;
-    private static final int DEFAULT_WORKING_DAYS = 5;
-    private static final int DEFAULT_WORKING_HOURS = 8;
 
     @FXML
     public void initialize() {
