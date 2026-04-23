@@ -1,5 +1,6 @@
 package com.github.dkw87.chronostt.service;
 
+import com.github.dkw87.chronostt.enumeration.TimeScale;
 import com.github.dkw87.chronostt.model.Project;
 import com.github.dkw87.chronostt.repository.memory.MemoryRepository;
 import org.slf4j.Logger;
@@ -21,6 +22,18 @@ public class DataService {
 
     public int getHoursDaily() {
         return MemoryRepository.getInstance().getSettings().getHoursDaily();
+    }
+
+    public TimeScale getTimeScale() {
+        return MemoryRepository.getInstance().getSettings().getTimeScale();
+    }
+
+    public boolean getNotifyOvertime() {
+        return MemoryRepository.getInstance().getSettings().getNotifyOvertime();
+    }
+
+    public boolean getAggragateProjectHours() {
+        return MemoryRepository.getInstance().getSettings().getAggregateProjectHours();
     }
 
     public static DataService getInstance() {
