@@ -98,6 +98,7 @@ public class SettingsController {
             }
         });
         projectComboBox.getItems().setAll(DataService.getInstance().getProjects());
+        projectComboBox.setValue(DataService.getInstance().getLastSelectedProject());
     }
 
     private void initDaysWeekSpinner() {
@@ -161,6 +162,12 @@ public class SettingsController {
     }
 
     public void startTracking() {
+        final Project project = projectComboBox.getSelectionModel().getSelectedItem();
+        if (project == null)  {
+            LOG.warn("No project selected");
+            return;
+        }
+        DataService.getInstance().storeLastSelectedProject(project);
         StageManager.getInstance().showTrackingView();
     }
 
