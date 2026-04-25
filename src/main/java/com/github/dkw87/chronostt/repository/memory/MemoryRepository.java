@@ -71,7 +71,7 @@ public class MemoryRepository {
         queue.add(() -> {
             lock.writeLock().lock();
             try {
-                LOG.info("Submitting settings for saving");
+                LOG.info("Submitting settings to save");
                 this.settings = settings;
                 StorageRepository.getInstance().saveSettings(this.settings, SaveMethod.ASYNCHRONOUS);
             } finally {
@@ -93,7 +93,9 @@ public class MemoryRepository {
         queue.add(() -> {
             lock.writeLock().lock();
             try {
+                LOG.info("Submitting projects to save");
                 this.projects = projects;
+                StorageRepository.getInstance().saveProjects(projects, SaveMethod.ASYNCHRONOUS);
             } finally {
                 lock.writeLock().unlock();
             }
@@ -129,11 +131,13 @@ public class MemoryRepository {
         }
     }
 
-    public void submitAllDays(List<DayEntry> trackedDays) {
+    public void submitTrackedDays(List<DayEntry> trackedDays) {
         queue.add(() -> {
             lock.writeLock().lock();
             try {
+                LOG.info("Submitting tracked days to save");
                 this.trackedDays = trackedDays;
+                StorageRepository.getInstance().saveTrackedDays(this.trackedDays, SaveMethod.ASYNCHRONOUS);
             } finally {
                 lock.writeLock().unlock();
             }
