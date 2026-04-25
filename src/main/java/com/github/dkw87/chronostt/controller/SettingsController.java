@@ -49,31 +49,31 @@ public class SettingsController {
     @FXML
     private void saveDaysWeek() {
         Integer days = daysWeekSpinner.getValue();
-        LOG.info("Saving daysWeek({})", days);
+        SettingsService.getInstance().storeDaysWeek(days);
     }
 
     @FXML
     private void saveHoursDaily() {
         Integer hours = hoursDailySpinner.getValue();
-        LOG.info("Saving hoursDaily({})", hours);
+        SettingsService.getInstance().storeHoursDaily(hours);
     }
 
     @FXML
     private void saveTimeScale() {
         TimeScale timeScale = timeScaleComboBox.getValue();
-        LOG.info("Saving timeScale({})", timeScale);
+        SettingsService.getInstance().storeTimeScale(timeScale);
     }
 
     @FXML
     private void saveNotifyOvertime() {
-        Boolean notifyOvertime = notifyOvertimeCheckBox.isSelected();
-        LOG.info("Saving notifyOvertime({})", notifyOvertime);
+        boolean notifyOvertime = notifyOvertimeCheckBox.isSelected();
+        SettingsService.getInstance().storeNotifyOvertime(notifyOvertime);
     }
 
     @FXML
     private void saveAggregateProjectHours() {
-        Boolean aggregateHours = aggregateProjectHoursCheckBox.isSelected();
-        LOG.info("Saving aggregateProjectHours({})", aggregateHours);
+        boolean aggregateHours = aggregateProjectHoursCheckBox.isSelected();
+        SettingsService.getInstance().storeAggragateProjectHours(aggregateHours);
     }
 
     private void initElements() {
