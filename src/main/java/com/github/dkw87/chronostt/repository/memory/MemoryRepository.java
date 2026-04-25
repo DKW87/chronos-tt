@@ -1,5 +1,6 @@
 package com.github.dkw87.chronostt.repository.memory;
 
+import com.github.dkw87.chronostt.enumeration.SaveMethod;
 import com.github.dkw87.chronostt.model.DayEntry;
 import com.github.dkw87.chronostt.model.Project;
 import com.github.dkw87.chronostt.model.Settings;
@@ -70,7 +71,9 @@ public class MemoryRepository {
         queue.add(() -> {
             lock.writeLock().lock();
             try {
+                LOG.info("Submitting settings for saving");
                 this.settings = settings;
+                StorageRepository.getInstance().saveSettings(this.settings, SaveMethod.ASYNCHRONOUS);
             } finally {
                 lock.writeLock().unlock();
             }
