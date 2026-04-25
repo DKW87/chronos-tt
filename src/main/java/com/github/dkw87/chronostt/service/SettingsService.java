@@ -7,25 +7,10 @@ import com.github.dkw87.chronostt.repository.memory.MemoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
+public class SettingsService {
 
-public class DataService {
+    private static final Logger LOG = LoggerFactory.getLogger(SettingsService.class);
 
-    private static final Logger LOG = LoggerFactory.getLogger(DataService.class);
-
-    public Project getLastSelectedProject() {
-        return MemoryRepository.getInstance().getSettings().getLastSelectedProject();
-    }
-
-    public void storeLastSelectedProject(Project project) {
-        Settings settings = MemoryRepository.getInstance().getSettings();
-        settings.setLastSelectedProject(project);
-        MemoryRepository.getInstance().submitSettings(settings);
-    }
-
-    public List<Project> getProjects() {
-        return MemoryRepository.getInstance().getProjects();
-    }
 
     public int getDaysWeek() {
         return MemoryRepository.getInstance().getSettings().getDaysWeek();
@@ -47,12 +32,22 @@ public class DataService {
         return MemoryRepository.getInstance().getSettings().getAggregateProjectHours();
     }
 
-    public static DataService getInstance() {
-        return DataService.SingletonHolder.INSTANCE;
+    public Project getLastSelectedProject() {
+        return MemoryRepository.getInstance().getSettings().getLastSelectedProject();
+    }
+
+    public void storeLastSelectedProject(Project project) {
+        Settings settings = MemoryRepository.getInstance().getSettings();
+        settings.setLastSelectedProject(project);
+        MemoryRepository.getInstance().submitSettings(settings);
+    }
+
+    public static SettingsService getInstance() {
+        return SettingsService.SingletonHolder.INSTANCE;
     }
 
     private static class SingletonHolder {
-        private static final DataService INSTANCE = new DataService();
+        private static final SettingsService INSTANCE = new SettingsService();
     }
     
 }
