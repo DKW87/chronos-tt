@@ -3,7 +3,8 @@ package com.github.dkw87.chronostt.controller;
 import com.github.dkw87.chronostt.StageManager;
 import com.github.dkw87.chronostt.enumeration.TimeScale;
 import com.github.dkw87.chronostt.model.Project;
-import com.github.dkw87.chronostt.service.DataService;
+import com.github.dkw87.chronostt.service.ProjectsService;
+import com.github.dkw87.chronostt.service.SettingsService;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.util.StringConverter;
@@ -97,12 +98,12 @@ public class SettingsController {
                 return null; // not used
             }
         });
-        projectComboBox.getItems().setAll(DataService.getInstance().getProjects());
-        projectComboBox.setValue(DataService.getInstance().getLastSelectedProject());
+        projectComboBox.getItems().setAll(ProjectsService.getInstance().getProjects());
+        projectComboBox.setValue(SettingsService.getInstance().getLastSelectedProject());
     }
 
     private void initDaysWeekSpinner() {
-        final int daysWeek = DataService.getInstance().getDaysWeek();
+        final int daysWeek = SettingsService.getInstance().getDaysWeek();
         daysWeekSpinner.setValueFactory(
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_VALUE, MAX_DAYS, daysWeek)
         );
@@ -112,7 +113,7 @@ public class SettingsController {
     }
 
     private void initHoursDailySpinner() {
-        final int hoursDaily = DataService.getInstance().getHoursDaily();
+        final int hoursDaily = SettingsService.getInstance().getHoursDaily();
         hoursDailySpinner.setValueFactory(
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_VALUE, MAX_HOURS, hoursDaily)
         );
@@ -135,18 +136,18 @@ public class SettingsController {
             }
         });
         timeScaleComboBox.getItems().setAll(TimeScale.values());
-        timeScaleComboBox.setValue(DataService.getInstance().getTimeScale());
+        timeScaleComboBox.setValue(SettingsService.getInstance().getTimeScale());
     }
 
     private void initNotifyOvertimeCheckBox() {
         notifyOvertimeCheckBox.setSelected(
-                DataService.getInstance().getNotifyOvertime()
+                SettingsService.getInstance().getNotifyOvertime()
         );
     }
 
     private void initAggregateProjectHoursCheckBox() {
         aggregateProjectHoursCheckBox.setSelected(
-                DataService.getInstance().getAggragateProjectHours()
+                SettingsService.getInstance().getAggragateProjectHours()
         );
     }
 
@@ -167,7 +168,7 @@ public class SettingsController {
             LOG.warn("No project selected");
             return;
         }
-        DataService.getInstance().storeLastSelectedProject(project);
+        SettingsService.getInstance().storeLastSelectedProject(project);
         StageManager.getInstance().showTrackingView();
     }
 
