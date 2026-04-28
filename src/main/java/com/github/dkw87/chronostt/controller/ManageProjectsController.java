@@ -18,6 +18,6 @@ public class ManageProjectsController {
     }
 
     @FXML
-    public void save() {}
+    public void saveProjects() {}
 
 }

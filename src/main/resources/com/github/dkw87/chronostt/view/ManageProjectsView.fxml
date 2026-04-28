@@ -40,7 +40,7 @@
 
     <HBox spacing="8" alignment="CENTER_RIGHT">
         <Button text="Cancel" onAction="#cancel" prefWidth="80"/>
-        <Button text="Save"   onAction="#save"   prefWidth="80"/>
+        <Button text="Save" onAction="#saveProjects" prefWidth="80"/>
     </HBox>
 
 </VBox>
