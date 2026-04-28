@@ -22,6 +22,14 @@ public class TrackingController {
         draggableStage();
     }
 
+    @FXML
+    public void stopTracking() {
+        StageManager.getInstance().showSettingsView();
+    }
+
+    @FXML
+    public void manageProjectsView() {}
+
     private void draggableStage() {
         root.setOnMousePressed(event -> {
             xOffset = event.getSceneX();
@@ -33,11 +41,4 @@ public class TrackingController {
         });
     }
 
-    @FXML
-    public void stopTracking() {
-        StageManager.getInstance().showSettingsView();
-    }
-
-    public void manageProjectsView() {
-    }
 }
