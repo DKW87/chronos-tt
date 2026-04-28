@@ -86,8 +86,8 @@ public class StageManager {
             scene = new Scene(root);
             stage.setScene(scene);
             return loader;
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
+        } catch (IOException e) {
+            LOG.error("Unable to get scene", e);
             return null;
         }
     }
