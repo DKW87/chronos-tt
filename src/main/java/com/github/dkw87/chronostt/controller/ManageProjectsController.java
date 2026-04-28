@@ -1,7 +1,7 @@
 package com.github.dkw87.chronostt.controller;
 
+import com.github.dkw87.chronostt.StageManager;
 import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 public class ManageProjectsController {
@@ -10,14 +10,14 @@ public class ManageProjectsController {
     public VBox projectsContainer;
 
     @FXML
-    public void addNewRow(MouseEvent event) {
-    }
+    public void addNewRow() {}
 
     @FXML
     public void cancel() {
+        StageManager.getInstance().hideManageProjectsView();
     }
 
     @FXML
-    public void save() {
-    }
+    public void save() {}
+
 }
