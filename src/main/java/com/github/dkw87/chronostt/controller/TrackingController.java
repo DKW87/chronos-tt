@@ -28,7 +28,9 @@ public class TrackingController {
     }
 
     @FXML
-    public void manageProjectsView() {}
+    public void manageProjectsView() {
+        StageManager.getInstance().showManageProjectsView();
+    }
 
     private void draggableStage() {
         root.setOnMousePressed(event -> {
