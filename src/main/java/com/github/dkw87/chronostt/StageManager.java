@@ -16,12 +16,24 @@ import java.io.IOException;
 public class StageManager {
 
     private static final Logger LOG = LoggerFactory.getLogger(StageManager.class);
+
+    // stage dimensions
     private static final int SETTINGS_STAGE_WIDTH = 250;
     private static final int SETTINGS_STAGE_HEIGHT = 410;
     private static final int TRACKING_STAGE_WIDTH = 300;
     private static final int TRACKING_STAGE_HEIGHT = 50;
     private static final int MANAGE_PROJECTS_STAGE_WIDTH = 350;
     private static final int MANAGE_PROJECTS_STAGE_HEIGHT = 500;
+
+    // stage titles
+    private static final String SETTINGS_STAGE_TITLE = "Chronos-TT: Settings";
+    private static final String TRACKING_STAGE_TITLE = "Chronos-TT: Tracking Time...";
+    private static final String MANAGE_PROJECTS_STAGE_TITLE = "Chronos-TT: Manage Projects";
+
+    // stage FXML
+    private static final String SETTINGS_STAGE_FXML = "view/SettingsView.fxml";
+    private static final String TRACKING_STAGE_FXML = "view/TrackingView.fxml";
+    private static final String MANAGE_PROJECTS_STAGE_FXML = "view/ManageProjectsView.fxml";
 
     private final Stage settingsStage = new Stage();
     private final Stage trackingStage = new Stage();
@@ -39,8 +51,8 @@ public class StageManager {
         settingsStage.setWidth(SETTINGS_STAGE_WIDTH);
         settingsStage.setHeight(SETTINGS_STAGE_HEIGHT);
         settingsStage.setResizable(false);
-        settingsStage.setTitle("Chronos-TT: Settings");
-        getScene("view/SettingsView.fxml",  settingsStage);
+        settingsStage.setTitle(SETTINGS_STAGE_TITLE);
+        getScene(SETTINGS_STAGE_FXML,  settingsStage);
         LOG.info("SettingsStage constructed");
     }
 
@@ -50,8 +62,8 @@ public class StageManager {
         trackingStage.setHeight(TRACKING_STAGE_HEIGHT);
         trackingStage.setResizable(false);
         trackingStage.setAlwaysOnTop(true);
-        trackingStage.setTitle("Chronos-TT: Tracking Time...");
-        getScene("view/TrackingView.fxml",  trackingStage);
+        trackingStage.setTitle(TRACKING_STAGE_TITLE);
+        getScene(TRACKING_STAGE_FXML,  trackingStage);
         LOG.info("TrackingStage constructed");
     }
 
@@ -61,8 +73,8 @@ public class StageManager {
         manageProjectsStage.setWidth(MANAGE_PROJECTS_STAGE_WIDTH);
         manageProjectsStage.setHeight(MANAGE_PROJECTS_STAGE_HEIGHT);
         manageProjectsStage.setResizable(false);
-        manageProjectsStage.setTitle("Chronos-TT: Manage Projects");
-        getScene("view/ManageProjectsView.fxml",  manageProjectsStage);
+        manageProjectsStage.setTitle(MANAGE_PROJECTS_STAGE_TITLE);
+        getScene(MANAGE_PROJECTS_STAGE_FXML,  manageProjectsStage);
         LOG.info("ManageProjectsStage constructed");
     }
 
