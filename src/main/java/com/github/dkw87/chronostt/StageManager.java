@@ -36,31 +36,32 @@ public class StageManager {
 
     private void constructSettingsStage() {
         settingsStage.initStyle(StageStyle.DECORATED);
-        getScene("view/SettingsView.fxml",  settingsStage);
         settingsStage.setWidth(SETTINGS_STAGE_WIDTH);
         settingsStage.setHeight(SETTINGS_STAGE_HEIGHT);
         settingsStage.setResizable(false);
         settingsStage.setTitle("Chronos-TT: Settings");
+        getScene("view/SettingsView.fxml",  settingsStage);
         LOG.info("SettingsStage constructed");
     }
 
     private void constructTrackingStage() {
         trackingStage.initStyle(StageStyle.UNDECORATED);
-        getScene("view/TrackingView.fxml",  trackingStage);
         trackingStage.setWidth(TRACKING_STAGE_WIDTH);
         trackingStage.setHeight(TRACKING_STAGE_HEIGHT);
+        trackingStage.setResizable(false);
         trackingStage.setAlwaysOnTop(true);
         trackingStage.setTitle("Chronos-TT: Tracking Time...");
+        getScene("view/TrackingView.fxml",  trackingStage);
         LOG.info("TrackingStage constructed");
     }
 
     private void constructManageProjectsStage() {
         manageProjectsStage.initStyle(StageStyle.UNDECORATED);
         manageProjectsStage.initModality(Modality.APPLICATION_MODAL);
-        manageProjectsStage.setResizable(false);
-        manageProjectsStage.setTitle("Chronos-TT: Manage Projects");
         manageProjectsStage.setWidth(MANAGE_PROJECTS_STAGE_WIDTH);
         manageProjectsStage.setHeight(MANAGE_PROJECTS_STAGE_HEIGHT);
+        manageProjectsStage.setResizable(false);
+        manageProjectsStage.setTitle("Chronos-TT: Manage Projects");
         getScene("view/ManageProjectsView.fxml",  manageProjectsStage);
         LOG.info("ManageProjectsStage constructed");
     }
