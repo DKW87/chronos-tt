@@ -76,6 +76,25 @@ public class SettingsController {
         SettingsService.getInstance().storeAggragateProjectHours(aggregateHours);
     }
 
+    @FXML
+    public void startTracking() {
+        final Project project = projectComboBox.getSelectionModel().getSelectedItem();
+        if (project == null)  {
+            LOG.warn("No project selected");
+            return;
+        }
+        SettingsService.getInstance().storeLastSelectedProject(project);
+        StageManager.getInstance().showTrackingView();
+    }
+
+    @FXML
+    public void manageProjectsView() {
+        StageManager.getInstance().showManageProjectsView();
+    }
+
+    @FXML
+    public void showTrackedDaysChart() {}
+
     private void initElements() {
         initProjectComboBox();
         initDaysWeekSpinner();
@@ -162,17 +181,4 @@ public class SettingsController {
         });
     }
 
-    public void startTracking() {
-        final Project project = projectComboBox.getSelectionModel().getSelectedItem();
-        if (project == null)  {
-            LOG.warn("No project selected");
-            return;
-        }
-        SettingsService.getInstance().storeLastSelectedProject(project);
-        StageManager.getInstance().showTrackingView();
-    }
-
-    public void manageProjectsView() {}
-
-    public void showTrackedDaysChart() {}
 }
