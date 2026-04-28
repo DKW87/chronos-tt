@@ -3,6 +3,7 @@ package com.github.dkw87.chronostt;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import lombok.Getter;
@@ -19,14 +20,18 @@ public class StageManager {
     private static final int SETTINGS_STAGE_HEIGHT = 410;
     private static final int TRACKING_STAGE_WIDTH = 300;
     private static final int TRACKING_STAGE_HEIGHT = 50;
+    private static final int MANAGE_PROJECTS_STAGE_WIDTH = 350;
+    private static final int MANAGE_PROJECTS_STAGE_HEIGHT = 500;
 
     private final Stage settingsStage = new Stage();
     private final Stage trackingStage = new Stage();
+    private final Stage manageProjectsStage = new Stage();
 
     private StageManager() {
         LOG.info("Constructing stages...");
         constructSettingsStage();
         constructTrackingStage();
+        constructManageProjectsStage();
     }
 
     private void constructSettingsStage() {
@@ -47,6 +52,17 @@ public class StageManager {
         trackingStage.setAlwaysOnTop(true);
         trackingStage.setTitle("Chronos-TT: Tracking Time...");
         LOG.info("TrackingStage constructed");
+    }
+
+    private void constructManageProjectsStage() {
+        manageProjectsStage.initStyle(StageStyle.UNDECORATED);
+        manageProjectsStage.initModality(Modality.APPLICATION_MODAL);
+        manageProjectsStage.setResizable(false);
+        manageProjectsStage.setTitle("Chronos-TT: Manage Projects");
+        manageProjectsStage.setWidth(MANAGE_PROJECTS_STAGE_WIDTH);
+        manageProjectsStage.setHeight(MANAGE_PROJECTS_STAGE_HEIGHT);
+        getScene("view/ManageProjectsView.fxml",  manageProjectsStage);
+        LOG.info("ManageProjectsStage constructed");
     }
 
     private FXMLLoader getScene(String fxml, Stage stage) {
@@ -73,6 +89,16 @@ public class StageManager {
         LOG.info("Switching to TrackingView");
         settingsStage.hide();
         trackingStage.show();
+    }
+
+    public void showManageProjectsView() {
+        LOG.info("Showing ManageProjectsView");
+        manageProjectsStage.show();
+    }
+
+    public void hideManageProjectsView() {
+        LOG.info("Hiding ManageProjectsView");
+        manageProjectsStage.hide();
     }
 
     public static StageManager getInstance() {
