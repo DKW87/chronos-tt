@@ -3,7 +3,6 @@ package com.github.dkw87.chronostt.controller;
 import com.github.dkw87.chronostt.StageManager;
 import com.github.dkw87.chronostt.model.Project;
 import com.github.dkw87.chronostt.service.ProjectsService;
-import com.github.dkw87.chronostt.service.SettingsService;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
