@@ -11,12 +11,12 @@ public class ProjectsService {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProjectsService.class);
 
-    public static ProjectsService getInstance() {
-        return ProjectsService.SingletonHolder.INSTANCE;
-    }
-
     public List<Project> getProjects() {
         return MemoryRepository.getInstance().getProjects();
+    }
+
+    public static ProjectsService getInstance() {
+        return ProjectsService.SingletonHolder.INSTANCE;
     }
 
     private static class SingletonHolder {
