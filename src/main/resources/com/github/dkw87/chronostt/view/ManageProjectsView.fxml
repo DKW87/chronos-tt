@@ -43,8 +43,16 @@
     <Separator/>
 
     <HBox spacing="8" alignment="CENTER_RIGHT">
-        <Button text="Cancel" onAction="#cancel" prefWidth="80"/>
-        <Button text="Save" onAction="#saveProjects" prefWidth="80"/>
+        <Button text="Cancel" onAction="#cancel" prefWidth="80">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </Button>
+        <Button text="Save" onAction="#saveProjects" prefWidth="80">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </Button>
     </HBox>
 
 </VBox>
