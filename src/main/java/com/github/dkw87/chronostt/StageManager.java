@@ -1,5 +1,8 @@
 package com.github.dkw87.chronostt;
 
+import com.github.dkw87.chronostt.controller.ManageProjectsController;
+import com.github.dkw87.chronostt.controller.SettingsController;
+import com.github.dkw87.chronostt.controller.TrackingController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -39,43 +42,58 @@ public class StageManager {
     private final Stage trackingStage = new Stage();
     private final Stage manageProjectsStage = new Stage();
 
+    public final SettingsController settingsController;
+    public final TrackingController trackingController;
+    public final ManageProjectsController manageProjectsController;
+
     private StageManager() {
         LOG.info("Constructing stages...");
-        constructSettingsStage();
-        constructTrackingStage();
-        constructManageProjectsStage();
+        final FXMLLoader settingsLoader = constructSettingsStage();
+        settingsController = settingsLoader.getController();
+
+        final FXMLLoader trackingLoader = constructTrackingStage();
+        trackingController = trackingLoader.getController();
+
+        final FXMLLoader manageProjectsLoader = constructManageProjectsStage();
+        manageProjectsController = manageProjectsLoader.getController();
     }
 
-    private void constructSettingsStage() {
+    private FXMLLoader constructSettingsStage() {
         settingsStage.initStyle(StageStyle.DECORATED);
         settingsStage.setWidth(SETTINGS_STAGE_WIDTH);
         settingsStage.setHeight(SETTINGS_STAGE_HEIGHT);
         settingsStage.setResizable(false);
         settingsStage.setTitle(SETTINGS_STAGE_TITLE);
-        getScene(SETTINGS_STAGE_FXML,  settingsStage);
+
+        final FXMLLoader loader = getScene(SETTINGS_STAGE_FXML,  settingsStage);
         LOG.info("SettingsStage constructed");
+        return loader;
     }
 
-    private void constructTrackingStage() {
+    private FXMLLoader constructTrackingStage() {
         trackingStage.initStyle(StageStyle.UNDECORATED);
         trackingStage.setWidth(TRACKING_STAGE_WIDTH);
         trackingStage.setHeight(TRACKING_STAGE_HEIGHT);
         trackingStage.setResizable(false);
         trackingStage.setAlwaysOnTop(true);
         trackingStage.setTitle(TRACKING_STAGE_TITLE);
-        getScene(TRACKING_STAGE_FXML,  trackingStage);
+
+        final FXMLLoader loader = getScene(TRACKING_STAGE_FXML,  trackingStage);
         LOG.info("TrackingStage constructed");
+        return loader;
     }
 
-    private void constructManageProjectsStage() {
+    private FXMLLoader constructManageProjectsStage() {
         manageProjectsStage.initStyle(StageStyle.UNDECORATED);
         manageProjectsStage.initModality(Modality.APPLICATION_MODAL);
         manageProjectsStage.setWidth(MANAGE_PROJECTS_STAGE_WIDTH);
         manageProjectsStage.setHeight(MANAGE_PROJECTS_STAGE_HEIGHT);
         manageProjectsStage.setResizable(false);
         manageProjectsStage.setTitle(MANAGE_PROJECTS_STAGE_TITLE);
-        getScene(MANAGE_PROJECTS_STAGE_FXML,  manageProjectsStage);
+
+        final FXMLLoader loader = getScene(MANAGE_PROJECTS_STAGE_FXML,  manageProjectsStage);
         LOG.info("ManageProjectsStage constructed");
+        return loader;
     }
 
     private FXMLLoader getScene(String fxml, Stage stage) {
