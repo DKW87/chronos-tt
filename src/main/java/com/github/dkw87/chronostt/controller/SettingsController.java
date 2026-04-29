@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class SettingsController {
 
     @FXML
-    public ComboBox<Project> projectComboBox;
+    private ComboBox<Project> projectComboBox;
 
     @FXML
     private Spinner<Integer> daysWeekSpinner;
@@ -41,7 +41,7 @@ public class SettingsController {
     private static final int MIN_VALUE = 1;
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         initElements();
         setListeners();
     }
@@ -77,7 +77,7 @@ public class SettingsController {
     }
 
     @FXML
-    public void startTracking() {
+    private void startTracking() {
         final Project project = projectComboBox.getSelectionModel().getSelectedItem();
         if (project == null)  {
             LOG.warn("No project selected");
@@ -88,12 +88,12 @@ public class SettingsController {
     }
 
     @FXML
-    public void manageProjectsView() {
+    private void manageProjectsView() {
         StageManager.getInstance().showManageProjectsView();
     }
 
     @FXML
-    public void showTrackedDaysChart() {}
+    private void showTrackedDaysChart() {}
 
     private void initElements() {
         initProjectComboBox();

@@ -14,24 +14,24 @@ public class TrackingController {
     private HBox root;
 
     @FXML
-    public ComboBox<Project> projectComboBox;
+    private ComboBox<Project> projectComboBox;
 
     private double xOffset;
     private double yOffset;
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         draggableStage();
         initProjectComboBox();
     }
 
     @FXML
-    public void stopTracking() {
+    private void stopTracking() {
         StageManager.getInstance().showSettingsView();
     }
 
     @FXML
-    public void manageProjectsView() {
+    private void manageProjectsView() {
         StageManager.getInstance().showManageProjectsView();
     }
 

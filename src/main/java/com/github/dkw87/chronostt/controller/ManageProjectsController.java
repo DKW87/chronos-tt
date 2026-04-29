@@ -7,17 +7,17 @@ import javafx.scene.layout.VBox;
 public class ManageProjectsController {
 
     @FXML
-    public VBox projectsContainer;
+    private VBox projectsContainer;
 
     @FXML
-    public void addNewRow() {}
+    private void addNewRow() {}
 
     @FXML
-    public void cancel() {
+    private void cancel() {
         StageManager.getInstance().hideManageProjectsView();
     }
 
     @FXML
-    public void saveProjects() {}
+    private void saveProjects() {}
 
 }
