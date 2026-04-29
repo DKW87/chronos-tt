@@ -2,9 +2,12 @@ package com.github.dkw87.chronostt.controller;
 
 import com.github.dkw87.chronostt.StageManager;
 import com.github.dkw87.chronostt.model.Project;
+import com.github.dkw87.chronostt.service.ProjectsService;
+import com.github.dkw87.chronostt.service.SettingsService;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
+import javafx.util.StringConverter;
 
 public class TrackingController {
 
@@ -20,6 +23,7 @@ public class TrackingController {
     @FXML
     public void initialize() {
         draggableStage();
+        initProjectComboBox();
     }
 
     @FXML
@@ -30,6 +34,22 @@ public class TrackingController {
     @FXML
     public void manageProjectsView() {
         StageManager.getInstance().showManageProjectsView();
+    }
+
+    private void initProjectComboBox() {
+        projectComboBox.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Project project) {
+                if (project == null) return "";
+                return project.getName();
+            }
+
+            @Override
+            public Project fromString(String string) {
+                return null; // not used
+            }
+        });
+        projectComboBox.getItems().setAll(ProjectsService.getInstance().getProjects());
     }
 
     private void draggableStage() {
