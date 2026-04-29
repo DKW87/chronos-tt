@@ -3,6 +3,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <VBox xmlns="http://javafx.com/javafx"
@@ -23,17 +24,29 @@
         <FontIcon iconLiteral="mdi2p-playlist-edit"
                   iconSize="32"
                   iconColor="grey"
-                  onMouseClicked="#manageProjectsView"/>
+                  onMouseClicked="#manageProjectsView">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </FontIcon>
         <Region HBox.hgrow="ALWAYS"/>
         <FontIcon iconLiteral="mdi2c-chart-bar-stacked"
                   iconSize="32"
                   iconColor="grey"
-                  onMouseClicked="#showTrackedDaysChart"/>
+                  onMouseClicked="#showTrackedDaysChart">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </FontIcon>
         <Region HBox.hgrow="ALWAYS"/>
         <FontIcon iconLiteral="mdi2p-play"
                   iconSize="32"
                   iconColor="green"
-                  onMouseClicked="#startTracking"/>
+                  onMouseClicked="#startTracking">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </FontIcon>
     </HBox>
 
     <VBox spacing="4">
