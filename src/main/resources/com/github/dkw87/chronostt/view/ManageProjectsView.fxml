@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
+<?import javafx.scene.Cursor?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.github.dkw87.chronostt.controller.ManageProjectsController"
@@ -33,8 +34,11 @@
     <FontIcon iconLiteral="mdi2p-pencil-plus-outline"
               iconSize="28"
               iconColor="grey"
-              onMouseClicked="#addNewRow"
-              style="-fx-cursor: hand;"/>
+              onMouseClicked="#addNewRow">
+        <cursor>
+            <Cursor fx:constant="HAND"/>
+        </cursor>
+    </FontIcon>
 
     <Separator/>
 
