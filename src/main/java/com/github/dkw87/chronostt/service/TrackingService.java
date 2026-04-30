@@ -67,6 +67,11 @@ public class TrackingService {
         queue.add(SHUTDOWN_TASK);
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void initialize() {
+        getInstance();
+    }
+
     public static TrackingService getInstance() {
         return TrackingService.SingletonHolder.INSTANCE;
     }
