@@ -84,6 +84,7 @@ public class SettingsController {
             return;
         }
         SettingsService.getInstance().storeLastSelectedProject(project);
+        StageManager.getInstance().getTrackingController().setProjectToTrack(project);
         StageManager.getInstance().showTrackingView();
     }
 

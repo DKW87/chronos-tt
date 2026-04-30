@@ -62,4 +62,8 @@ public class TrackingController {
         });
     }
 
+    public void setProjectToTrack(Project project) {
+        projectComboBox.setValue(project);
+    }
+
 }
