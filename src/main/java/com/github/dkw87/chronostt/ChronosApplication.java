@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.CompletableFuture;
+
 
 public class ChronosApplication extends Application {
 
@@ -14,10 +16,16 @@ public class ChronosApplication extends Application {
 
     @Override
     public void start(Stage stage) {
-        MemoryRepository.initialize();
-        TrackingService.initialize();
+        initialize();
         StageManager.getInstance().showSettingsView();
         LOG.info("Chronos-TT started.");
+    }
+
+    private void initialize() {
+        CompletableFuture.allOf(
+                CompletableFuture.runAsync(MemoryRepository::initialize),
+                CompletableFuture.runAsync(TrackingService::initialize)
+        ).join();
     }
 
     @Override
