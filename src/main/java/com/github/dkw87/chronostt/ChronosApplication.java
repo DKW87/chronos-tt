@@ -8,11 +8,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class ChronosApplication extends Application {
 
     private static final Logger LOG = LoggerFactory.getLogger(ChronosApplication.class);
+    private static final int THREADS = 2;
+    private static final AtomicInteger THREAD_COUNTER = new AtomicInteger(1);
 
     @Override
     public void start(Stage stage) {
@@ -22,9 +27,13 @@ public class ChronosApplication extends Application {
     }
 
     private void initialize() {
+        ExecutorService executor = Executors.newFixedThreadPool(THREADS,
+                runnable -> new Thread(runnable, "InitializationThread-" + THREAD_COUNTER.getAndIncrement())
+        );
+
         CompletableFuture.allOf(
-                CompletableFuture.runAsync(MemoryRepository::initialize),
-                CompletableFuture.runAsync(TrackingService::initialize)
+                CompletableFuture.runAsync(MemoryRepository::initialize, executor),
+                CompletableFuture.runAsync(TrackingService::initialize, executor)
         ).join();
     }
 
