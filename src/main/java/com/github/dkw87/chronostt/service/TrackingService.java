@@ -13,7 +13,7 @@ public class TrackingService {
 
     private static final Logger LOG = LoggerFactory.getLogger(TrackingService.class);
     private static final Runnable SHUTDOWN_TASK = () -> {};
-    private static final String CLASS_NAME = TrackingService.class.getName();
+    private static final String CLASS_NAME = TrackingService.class.getSimpleName();
     private static final String THREAD_NAME = String.format("%sThread", CLASS_NAME);
 
     private final ReadWriteLock lock;
