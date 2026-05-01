@@ -12,7 +12,7 @@ public class Settings {
 
     Integer daysWeek;
     Integer hoursDaily;
-    Project lastSelectedProject;
+    Project lastTrackedProject;
     TimeScale timeScale;
     Boolean notifyOvertime;
     Boolean aggregateProjectHours;
@@ -21,7 +21,7 @@ public class Settings {
         return Settings.builder()
                 .daysWeek(5)
                 .hoursDaily(8)
-                .lastSelectedProject(null)
+                .lastTrackedProject(null)
                 .timeScale(TimeScale.THIRTY_MINUTES)
                 .notifyOvertime(false)
                 .aggregateProjectHours(true)

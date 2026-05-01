@@ -83,7 +83,7 @@ public class SettingsController {
             LOG.warn("No project selected");
             return;
         }
-        SettingsService.getInstance().storeLastSelectedProject(project);
+        SettingsService.getInstance().storeLastTrackedProject(project);
         StageManager.getInstance().getTrackingController().setProjectToTrack(project);
         StageManager.getInstance().showTrackingView();
     }
@@ -119,7 +119,7 @@ public class SettingsController {
             }
         });
         projectComboBox.getItems().setAll(ProjectsService.getInstance().getProjects());
-        projectComboBox.setValue(SettingsService.getInstance().getLastSelectedProject());
+        projectComboBox.setValue(SettingsService.getInstance().getLastTrackedProject());
     }
 
     private void initDaysWeekSpinner() {
@@ -184,7 +184,7 @@ public class SettingsController {
 
     public void setProjectComboBox(Project project) {
         projectComboBox.setValue(project);
-        SettingsService.getInstance().storeLastSelectedProject(project);
+        SettingsService.getInstance().storeLastTrackedProject(project);
     }
 
 }

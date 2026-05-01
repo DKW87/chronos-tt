@@ -62,13 +62,13 @@ public class SettingsService {
         MemoryRepository.getInstance().submitSettings(settings);
     }
 
-    public Project getLastSelectedProject() {
-        return MemoryRepository.getInstance().getSettings().getLastSelectedProject();
+    public Project getLastTrackedProject() {
+        return MemoryRepository.getInstance().getSettings().getLastTrackedProject();
     }
 
-    public void storeLastSelectedProject(Project project) {
+    public void storeLastTrackedProject(Project project) {
         Settings settings = MemoryRepository.getInstance().getSettings();
-        settings.setLastSelectedProject(project);
+        settings.setLastTrackedProject(project);
         MemoryRepository.getInstance().submitSettings(settings);
     }
 
