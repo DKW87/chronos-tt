@@ -24,7 +24,8 @@ public class StorageRepository {
 
     private static final Logger LOG = LoggerFactory.getLogger(StorageRepository.class);
     private static final Runnable SHUTDOWN_TASK = () -> {};
-    private static final String THREAD_NAME = "StorageRepositoryThread";
+    private static final String CLASS_NAME = StorageRepository.class.getSimpleName();
+    private static final String THREAD_NAME = String.format("%sThread", CLASS_NAME);
 
     private static final String USER_HOME = System.getProperty("user.home");
     private static final String APP_DIR = ".chronos-tt";
@@ -37,7 +38,7 @@ public class StorageRepository {
     private final ObjectMapper objectMapper;
     
     private StorageRepository(){
-        LOG.info("Initializing StorageRepository...");
+        LOG.info("Initializing {}...", CLASS_NAME);
         createAppDir();
         queue = new LinkedBlockingQueue<>();
         objectMapper = new ObjectMapper();
@@ -215,12 +216,12 @@ public class StorageRepository {
     }
 
     public void stop() {
-        LOG.info("StorageRepository shutting down...");
+        LOG.info("{} shutting down...", CLASS_NAME);
         queue.add(SHUTDOWN_TASK);
     }
 
     private void shutdown() {
-        LOG.info("StorageRepository has stopped");
+        LOG.info("{} has stopped", CLASS_NAME);
         // do something maybe
     }
 

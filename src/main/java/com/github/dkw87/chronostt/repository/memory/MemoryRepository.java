@@ -18,7 +18,8 @@ public class MemoryRepository {
 
     private static final Logger LOG = LoggerFactory.getLogger(MemoryRepository.class);
     private static final Runnable SHUTDOWN_TASK = () -> {};
-    private static final String THREAD_NAME = "MemoryRepositoryThread";
+    private static final String CLASS_NAME = MemoryRepository.class.getSimpleName();
+    private static final String THREAD_NAME = String.format("%sThread", CLASS_NAME);
 
     private final ReadWriteLock lock;
     private final BlockingQueue<Runnable> queue;
@@ -29,7 +30,7 @@ public class MemoryRepository {
     private List<DayEntry> trackedDays;
 
     private MemoryRepository() {
-        LOG.info("Initializing MemoryRepository...");
+        LOG.info("Initializing {}...", CLASS_NAME);
         lock = new ReentrantReadWriteLock();
         queue = new LinkedBlockingQueue<>();
         loadSavedData();
@@ -154,12 +155,12 @@ public class MemoryRepository {
     }
 
     public void stop() {
-        LOG.info("MemoryRepository shutting down...");
+        LOG.info("{} shutting down...", CLASS_NAME);
         queue.add(SHUTDOWN_TASK);
     }
 
     private void shutdown() {
-        LOG.info("MemoryRepository has stopped");
+        LOG.info("{} has stopped", CLASS_NAME);
         // maybe add some final writing to disk using StorageRepository
     }
 
