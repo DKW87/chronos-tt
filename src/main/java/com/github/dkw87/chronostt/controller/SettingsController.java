@@ -182,4 +182,9 @@ public class SettingsController {
         });
     }
 
+    public void setProjectComboBox(Project project) {
+        projectComboBox.setValue(project);
+        SettingsService.getInstance().storeLastSelectedProject(project);
+    }
+
 }
