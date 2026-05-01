@@ -3,6 +3,9 @@ package com.github.dkw87.chronostt.enumeration;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Refers to the AFAS timescale which only supports below values.
+ */
 @Getter
 @RequiredArgsConstructor
 public enum TimeScale {
