@@ -18,6 +18,7 @@ public class ChronosApplication extends Application {
     private static final Logger LOG = LoggerFactory.getLogger(ChronosApplication.class);
     private static final int THREADS = 2;
     private static final AtomicInteger THREAD_COUNTER = new AtomicInteger(1);
+    private static final String INITIALIZATION_THREAD_NAME = "InitializationThread-";
 
     @Override
     public void start(Stage stage) {
@@ -28,7 +29,7 @@ public class ChronosApplication extends Application {
 
     private void initialize() {
         ExecutorService executor = Executors.newFixedThreadPool(THREADS,
-                runnable -> new Thread(runnable, "InitializationThread-" + THREAD_COUNTER.getAndIncrement())
+                runnable -> new Thread(runnable, INITIALIZATION_THREAD_NAME + THREAD_COUNTER.getAndIncrement())
         );
 
         CompletableFuture.allOf(
