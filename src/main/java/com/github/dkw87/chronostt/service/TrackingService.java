@@ -68,9 +68,15 @@ public class TrackingService {
     }
 
     public void startTracking(Project project) {
+        queue.add(() -> {
+            LOG.info("{}", project.getName());
+        });
     }
 
     public void stopTracking() {
+        queue.add(() -> {
+            LOG.info("Stopped time tracking");
+        });
     }
 
     public void stop() {
