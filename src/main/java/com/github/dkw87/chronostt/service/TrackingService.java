@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class TrackingService {
 
@@ -18,14 +16,12 @@ public class TrackingService {
     private static final String CLASS_NAME = TrackingService.class.getSimpleName();
     private static final String THREAD_NAME = String.format("%sThread", CLASS_NAME);
 
-    private final ReadWriteLock lock;
     private final BlockingQueue<Runnable> queue;
 
     private DayEntry today;
 
     private TrackingService() {
         LOG.info("Initializing {}...", CLASS_NAME);
-        lock = new ReentrantReadWriteLock();
         queue = new LinkedBlockingQueue<>();
         start();
     }
