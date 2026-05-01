@@ -1,6 +1,8 @@
 package com.github.dkw87.chronostt.service;
 
+import com.github.dkw87.chronostt.model.DayEntry;
 import com.github.dkw87.chronostt.model.Project;
+import com.github.dkw87.chronostt.repository.memory.MemoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +20,8 @@ public class TrackingService {
 
     private final ReadWriteLock lock;
     private final BlockingQueue<Runnable> queue;
+
+    private DayEntry today;
 
     private TrackingService() {
         LOG.info("Initializing {}...", CLASS_NAME);
@@ -39,8 +43,13 @@ public class TrackingService {
                     }
 
                     task.run();
+
+                    if (queue.peek() == null) {
+                        submitTrackingData();
+                    }
                 } catch (InterruptedException e){
-                    LOG.error("{} interrupted, {} tasks left in queue", THREAD_NAME, queue.size(), e);
+                    LOG.error("{} interrupted, {} tasks left in queue - attempting to store today's tracking data",
+                            THREAD_NAME, queue.size(), e);
                     Thread.currentThread().interrupt();
                     break;
                 }
@@ -51,9 +60,15 @@ public class TrackingService {
         trackingServiceThread.start();
     }
 
+    private void submitTrackingData() {
+        if (today == null) return;
+        LOG.info("Submitting today's data");
+        MemoryRepository.getInstance().submitToday(today);
+    }
+
     private void shutdown() {
+        submitTrackingData();
         LOG.info("{} stopped", CLASS_NAME);
-        // maybe more stuff
     }
 
     public void startTracking(Project project) {
