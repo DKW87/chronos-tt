@@ -29,6 +29,7 @@ public class TrackingController {
 
     @FXML
     private void stopTracking() {
+        StageManager.getInstance().getSettingsController().setProjectComboBox(projectComboBox.getValue());
         TrackingService.getInstance().stopTracking();
         StageManager.getInstance().showSettingsView();
         projectComboBox.setValue(null);
@@ -70,7 +71,6 @@ public class TrackingController {
         projectComboBox.valueProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue == null) return;
             startTracking();
-            StageManager.getInstance().getSettingsController().setProjectComboBox(projectComboBox.getValue());
         });
     }
 
