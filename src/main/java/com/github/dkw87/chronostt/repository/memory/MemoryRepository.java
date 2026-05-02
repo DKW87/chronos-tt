@@ -41,6 +41,7 @@ public class MemoryRepository {
         lock = new ReentrantReadWriteLock();
         queue = new LinkedBlockingQueue<>();
         loadSavedData();
+        setModelIds();
         start();
     }
 
@@ -69,7 +70,6 @@ public class MemoryRepository {
     private void start() {
         Thread memoryRepositoryThread = new Thread(() -> {
             LOG.info("{} started", THREAD_NAME);
-            setModelIds();
             while (true) {
                 try {
                     Runnable task = queue.take();
