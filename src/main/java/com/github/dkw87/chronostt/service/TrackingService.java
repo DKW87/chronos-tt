@@ -68,6 +68,11 @@ public class TrackingService {
     }
 
     public void startTracking(Project project) {
+        if (project == null) {
+            LOG.error("Project cannot be null");
+            return;
+        }
+
         queue.add(() -> {
             LOG.info("{}", project.getName());
         });
