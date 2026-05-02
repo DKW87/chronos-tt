@@ -9,6 +9,7 @@ import com.github.dkw87.chronostt.repository.storage.StorageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -42,6 +43,7 @@ public class MemoryRepository {
         queue = new LinkedBlockingQueue<>();
         loadSavedData();
         setModelIds();
+        setToday();
         start();
     }
 
@@ -65,6 +67,27 @@ public class MemoryRepository {
         if (timeEntryId > NO_ID) TIME_ENTRY_ID.set(timeEntryId);
         final long currentTime = System.currentTimeMillis();
         LOG.info("Retrieving and setting IDs completed in {}MS", (currentTime - startTime));
+    }
+
+    private void setToday() {
+        final LocalDate now = LocalDate.now();
+        final boolean todayExists = trackedDays.stream().anyMatch(day -> day.getDay().equals(now));
+
+        if (todayExists) {
+            today = trackedDays.stream().filter(day -> day.getDay().equals(now)).findFirst().get();
+            return;
+        }
+
+        createToday(now);
+    }
+
+    private void createToday(LocalDate now) {
+        today = DayEntry.builder()
+                .id(DAY_ENTRY_ID.incrementAndGet())
+                .day(now)
+                .timeEntries(List.of())
+                .minutesWorked(0L)
+                .build();
     }
 
     private void start() {
