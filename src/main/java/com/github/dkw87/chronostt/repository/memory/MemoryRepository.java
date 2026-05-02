@@ -39,11 +39,17 @@ public class MemoryRepository {
 
     private MemoryRepository() {
         LOG.info("Initializing {}...", CLASS_NAME);
+        final long startTime = System.currentTimeMillis();
+
         lock = new ReentrantReadWriteLock();
         queue = new LinkedBlockingQueue<>();
         loadSavedData();
         setModelIds();
         setToday();
+
+        final long currentTime = System.currentTimeMillis();
+        LOG.info("Initialization completed in {}MS", (currentTime - startTime));
+
         start();
     }
 
@@ -54,7 +60,6 @@ public class MemoryRepository {
     }
 
     private void setModelIds() {
-        final long startTime = System.currentTimeMillis();
         final long projectId = projects.stream().mapToLong(Project::getId).max().orElse(NO_ID);
         final long dayEntryId = trackedDays.stream().mapToLong(DayEntry::getId).max().orElse(NO_ID);
         final List<TimeEntry> timeEntries = trackedDays.stream().flatMap(
@@ -65,8 +70,6 @@ public class MemoryRepository {
         if (projectId > NO_ID) PROJECT_ID.set(projectId);
         if (dayEntryId > NO_ID) DAY_ENTRY_ID.set(dayEntryId);
         if (timeEntryId > NO_ID) TIME_ENTRY_ID.set(timeEntryId);
-        final long currentTime = System.currentTimeMillis();
-        LOG.info("Retrieving and setting IDs completed in {}MS", (currentTime - startTime));
     }
 
     private void setToday() {
