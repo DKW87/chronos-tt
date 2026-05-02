@@ -23,11 +23,10 @@ public class MemoryRepository {
     private static final String CLASS_NAME = MemoryRepository.class.getSimpleName();
     private static final String THREAD_NAME = String.format("%sThread", CLASS_NAME);
 
-    private static final Long DEFAULT_ID = 1L;
-    private static final Long NO_ID = 0L;
-    private static final AtomicLong DAY_ENTRY_ID = new AtomicLong(DEFAULT_ID);
-    private static final AtomicLong PROJECT_ID = new AtomicLong(DEFAULT_ID);
-    private static final AtomicLong TIME_ENTRY_ID = new AtomicLong(DEFAULT_ID);
+    private static final long NO_ID = -1L;
+    private static final AtomicLong DAY_ENTRY_ID = new AtomicLong(0L);
+    private static final AtomicLong PROJECT_ID = new AtomicLong(0L);
+    private static final AtomicLong TIME_ENTRY_ID = new AtomicLong(0L);
 
     private final ReadWriteLock lock;
     private final BlockingQueue<Runnable> queue;
@@ -64,7 +63,7 @@ public class MemoryRepository {
         if (dayEntryId > NO_ID) DAY_ENTRY_ID.set(dayEntryId);
         if (timeEntryId > NO_ID) TIME_ENTRY_ID.set(timeEntryId);
         final long currentTime = System.currentTimeMillis();
-        LOG.info("Calculating and setting IDs completed in {}MS", (currentTime - startTime));
+        LOG.info("Retrieving and setting IDs completed in {}MS", (currentTime - startTime));
     }
 
     private void start() {
