@@ -70,21 +70,21 @@ public class MemoryRepository {
     }
 
     private void setToday() {
-        final LocalDate now = LocalDate.now();
-        final boolean todayExists = trackedDays.stream().anyMatch(day -> day.getDay().equals(now));
+        final LocalDate date = LocalDate.now();
+        final boolean todayExists = trackedDays.stream().anyMatch(day -> day.getDay().equals(date));
 
         if (todayExists) {
-            today = trackedDays.stream().filter(day -> day.getDay().equals(now)).findFirst().get();
+            today = trackedDays.stream().filter(day -> day.getDay().equals(date)).findFirst().get();
             return;
         }
 
-        createToday(now);
+        createToday(date);
     }
 
-    private void createToday(LocalDate now) {
+    private void createToday(LocalDate date) {
         today = DayEntry.builder()
                 .id(DAY_ENTRY_ID.incrementAndGet())
-                .day(now)
+                .day(date)
                 .timeEntries(List.of())
                 .minutesWorked(0L)
                 .build();
