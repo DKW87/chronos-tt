@@ -4,6 +4,7 @@ import com.github.dkw87.chronostt.enumeration.SaveMethod;
 import com.github.dkw87.chronostt.model.DayEntry;
 import com.github.dkw87.chronostt.model.Project;
 import com.github.dkw87.chronostt.model.Settings;
+import com.github.dkw87.chronostt.model.TimeEntry;
 import com.github.dkw87.chronostt.repository.storage.StorageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -20,6 +22,12 @@ public class MemoryRepository {
     private static final Runnable SHUTDOWN_TASK = () -> {};
     private static final String CLASS_NAME = MemoryRepository.class.getSimpleName();
     private static final String THREAD_NAME = String.format("%sThread", CLASS_NAME);
+
+    private static final Long DEFAULT_ID = 1L;
+    private static final Long NO_ID = 0L;
+    private static final AtomicLong DAY_ENTRY_ID = new AtomicLong(DEFAULT_ID);
+    private static final AtomicLong PROJECT_ID = new AtomicLong(DEFAULT_ID);
+    private static final AtomicLong TIME_ENTRY_ID = new AtomicLong(DEFAULT_ID);
 
     private final ReadWriteLock lock;
     private final BlockingQueue<Runnable> queue;
@@ -43,9 +51,26 @@ public class MemoryRepository {
         trackedDays = StorageRepository.getInstance().loadTrackedDays();
     }
 
+    private void setModelIds() {
+        final long startTime = System.currentTimeMillis();
+        final long projectId = projects.stream().mapToLong(Project::getId).max().orElse(NO_ID);
+        final long dayEntryId = trackedDays.stream().mapToLong(DayEntry::getId).max().orElse(NO_ID);
+        final List<TimeEntry> timeEntries = trackedDays.stream().flatMap(
+                day -> day.getTimeEntries().stream()
+        ).toList();
+        final long timeEntryId = timeEntries.stream().mapToLong(TimeEntry::getId).max().orElse(NO_ID);
+
+        if (projectId > NO_ID) PROJECT_ID.set(projectId);
+        if (dayEntryId > NO_ID) DAY_ENTRY_ID.set(dayEntryId);
+        if (timeEntryId > NO_ID) TIME_ENTRY_ID.set(timeEntryId);
+        final long currentTime = System.currentTimeMillis();
+        LOG.info("Calculating and setting IDs completed in {}MS", (currentTime - startTime));
+    }
+
     private void start() {
         Thread memoryRepositoryThread = new Thread(() -> {
             LOG.info("{} started", THREAD_NAME);
+            setModelIds();
             while (true) {
                 try {
                     Runnable task = queue.take();
