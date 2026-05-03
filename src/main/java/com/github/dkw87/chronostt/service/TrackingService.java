@@ -23,6 +23,7 @@ public class TrackingService {
     private TrackingService() {
         LOG.info("Initializing {}...", CLASS_NAME);
         queue = new LinkedBlockingQueue<>();
+        today = MemoryRepository.getInstance().getToday();
         start();
     }
 
