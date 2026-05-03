@@ -162,11 +162,14 @@ public class MemoryRepository {
         }
     }
 
-    public void submitToday(DayEntry today) {
+    public void submitToday(DayEntry newToday) {
         queue.add(() -> {
             lock.writeLock().lock();
             try {
-                this.today = today;
+                this.today = newToday;
+                trackedDays.removeIf(day -> day.getDay().equals(newToday.getDay()));
+                trackedDays.add(newToday);
+                StorageRepository.getInstance().saveTrackedDays(trackedDays, SaveMethod.ASYNCHRONOUS);
             } finally {
                 lock.writeLock().unlock();
             }
