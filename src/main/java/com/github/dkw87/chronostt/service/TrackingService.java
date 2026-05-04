@@ -2,10 +2,13 @@ package com.github.dkw87.chronostt.service;
 
 import com.github.dkw87.chronostt.model.DayEntry;
 import com.github.dkw87.chronostt.model.Project;
+import com.github.dkw87.chronostt.model.TimeEntry;
 import com.github.dkw87.chronostt.repository.memory.MemoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
