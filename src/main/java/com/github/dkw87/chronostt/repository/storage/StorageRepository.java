@@ -133,7 +133,7 @@ public class StorageRepository {
 
         if (!file.exists()) {
             LOG.warn("{} does not exist, returning default values", PROJECTS_FILE);
-            projects = List.of(Project.defaults());
+            projects = new ArrayList<>(List.of(Project.defaults()));
             saveProjects(projects, SaveMethod.SYNCHRONOUS);
             return projects;
         }
