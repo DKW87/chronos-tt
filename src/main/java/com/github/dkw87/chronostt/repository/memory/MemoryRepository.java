@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -88,7 +89,7 @@ public class MemoryRepository {
         today = DayEntry.builder()
                 .id(DAY_ENTRY_ID.incrementAndGet())
                 .day(date)
-                .timeEntries(List.of())
+                .timeEntries(new ArrayList<>())
                 .minutesWorked(0L)
                 .build();
     }
