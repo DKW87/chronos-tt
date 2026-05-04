@@ -84,7 +84,7 @@ public class StageManager {
     }
 
     private FXMLLoader constructManageProjectsStage() {
-        manageProjectsStage.initStyle(StageStyle.UNDECORATED);
+        manageProjectsStage.initStyle(StageStyle.DECORATED);
         manageProjectsStage.initModality(Modality.APPLICATION_MODAL);
         manageProjectsStage.setWidth(MANAGE_PROJECTS_STAGE_WIDTH);
         manageProjectsStage.setHeight(MANAGE_PROJECTS_STAGE_HEIGHT);
