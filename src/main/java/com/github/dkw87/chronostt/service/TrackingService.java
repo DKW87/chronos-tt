@@ -87,7 +87,15 @@ public class TrackingService {
 
     public void stopTracking() {
         queue.add(() -> {
-            LOG.info("Stopped time tracking");
+            final long latestId = MemoryRepository.getInstance().getTimeEntryId();
+            TimeEntry entry = today.getTimeEntries().stream()
+                    .filter(t -> t.getId().equals(latestId))
+                    .findFirst()
+                    .get();
+            today.getTimeEntries().remove(entry);
+            entry.setEnd(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+            today.getTimeEntries().add(entry);
+            LOG.info("Stopped tracking {} with id {}", entry.getProject().getName(), entry.getId());
         });
     }
 
