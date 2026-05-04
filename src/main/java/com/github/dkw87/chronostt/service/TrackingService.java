@@ -74,7 +74,14 @@ public class TrackingService {
         }
 
         queue.add(() -> {
-            LOG.info("{}", project.getName());
+            if (today == null) today = MemoryRepository.getInstance().getToday();
+            final TimeEntry entry = TimeEntry.builder()
+                    .id(MemoryRepository.getInstance().getIncrementedTimeEntryId())
+                    .project(project)
+                    .start(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS))
+                    .build();
+            today.getTimeEntries().add(entry);
+            LOG.info("Started tracking {} with id {}", entry.getProject().getName(), entry.getId());
         });
     }
 
