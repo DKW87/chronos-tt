@@ -70,6 +70,11 @@ public class TrackingController {
     private void setListeners() {
         projectComboBox.valueProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue == null) return;
+
+            if (StageManager.getInstance().getTrackingStage().isShowing()) {
+                TrackingService.getInstance().stopTracking();
+            }
+
             startTracking();
         });
     }
