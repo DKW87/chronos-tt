@@ -207,6 +207,24 @@ public class MemoryRepository {
         }
     }
 
+    public long getTimeEntryId() {
+        lock.readLock().lock();
+        try {
+            return TIME_ENTRY_ID.get();
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
+
+    public long getIncrementedTimeEntryId() {
+        lock.readLock().lock();
+        try {
+            return TIME_ENTRY_ID.incrementAndGet();
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
+
     public void stop() {
         LOG.info("{} shutting down...", CLASS_NAME);
         queue.add(SHUTDOWN_TASK);
