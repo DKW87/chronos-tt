@@ -61,7 +61,7 @@ public class TrackingService {
 
     private void submitTrackingData() {
         if (today == null) return;
-        LOG.info("Submitting today's data");
+        LOG.info("Submitting tracking data...");
         MemoryRepository.getInstance().submitToday(today);
     }
 
