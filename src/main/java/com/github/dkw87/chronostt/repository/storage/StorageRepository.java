@@ -200,6 +200,7 @@ public class StorageRepository {
     public void saveTrackedDays(List<DayEntry> days, SaveMethod method) {
         if  (method == SaveMethod.ASYNCHRONOUS) {
             queue.add(() -> persistTrackedDays(days));
+            return;
         }
         persistTrackedDays(days);
     }
