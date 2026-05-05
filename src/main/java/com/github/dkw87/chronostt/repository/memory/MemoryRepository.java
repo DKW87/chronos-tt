@@ -115,7 +115,6 @@ public class MemoryRepository {
             }
             shutdown();
         }, THREAD_NAME);
-        memoryRepositoryThread.setDaemon(true);
         memoryRepositoryThread.start();
     }
 

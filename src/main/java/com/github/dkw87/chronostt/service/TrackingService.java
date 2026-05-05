@@ -55,7 +55,6 @@ public class TrackingService {
             }
             shutdown();
         }, THREAD_NAME);
-        trackingServiceThread.setDaemon(true);
         trackingServiceThread.start();
     }
 
@@ -95,7 +94,7 @@ public class TrackingService {
                     .filter(t -> t.getId().equals(latestId))
                     .findFirst()
                     .get();
-            
+
             today.getTimeEntries().remove(entry);
             entry.setEnd(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
 

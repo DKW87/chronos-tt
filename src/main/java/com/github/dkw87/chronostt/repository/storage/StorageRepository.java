@@ -76,7 +76,6 @@ public class StorageRepository {
             LOG.info("{} stopped", THREAD_NAME);
             shutdown();
         }, THREAD_NAME);
-        storageRepositoryThread.setDaemon(true);
         storageRepositoryThread.start();
     }
 
