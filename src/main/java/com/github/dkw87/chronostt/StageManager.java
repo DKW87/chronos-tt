@@ -92,6 +92,7 @@ public class StageManager {
         manageProjectsStage.setOnCloseRequest(e -> {
             e.consume();
             hideManageProjectsView();
+            manageProjectsController.reInitialize();
         });
         manageProjectsStage.setWidth(MANAGE_PROJECTS_STAGE_WIDTH);
         manageProjectsStage.setHeight(MANAGE_PROJECTS_STAGE_HEIGHT);
