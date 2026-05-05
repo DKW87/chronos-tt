@@ -21,8 +21,7 @@ public class ManageProjectsController {
 
     @FXML
     private void addNewRow() {
-        Project defaultProject = Project.empty();
-        addRow(defaultProject);
+        addRow(Project.empty());
     }
 
     @FXML
