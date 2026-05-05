@@ -1,6 +1,7 @@
 package com.github.dkw87.chronostt;
 
 import com.github.dkw87.chronostt.repository.memory.MemoryRepository;
+import com.github.dkw87.chronostt.repository.storage.StorageRepository;
 import com.github.dkw87.chronostt.service.TrackingService;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -24,7 +25,7 @@ public class ChronosApplication extends Application {
     public void start(Stage stage) {
         initialize();
         StageManager.getInstance().showSettingsView();
-        LOG.info("Chronos-TT started.");
+        LOG.info("Chronos-TT started");
     }
 
     private void initialize() {
@@ -41,6 +42,9 @@ public class ChronosApplication extends Application {
     @Override
     public void stop() {
         LOG.info("Chronos-TT stopping...");
+        TrackingService.getInstance().stop();
+        MemoryRepository.getInstance().stop();
+        StorageRepository.getInstance().stop();
     }
 
 }
