@@ -15,6 +15,6 @@ public class DayEntry {
     Long id;
     LocalDate day;
     List<TimeEntry> timeEntries;
-    Long minutesWorked;
+    Long secondsWorked;
 
 }

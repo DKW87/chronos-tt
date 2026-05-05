@@ -90,7 +90,7 @@ public class MemoryRepository {
                 .id(DAY_ENTRY_ID.incrementAndGet())
                 .day(date)
                 .timeEntries(new ArrayList<>())
-                .minutesWorked(0L)
+                .secondsWorked(0L)
                 .build();
     }
 
