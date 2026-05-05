@@ -25,6 +25,7 @@ public class ManageProjectsController {
     @FXML
     private void cancel() {
         StageManager.getInstance().hideManageProjectsView();
+        reInitialize();
     }
 
     @FXML
@@ -43,6 +44,11 @@ public class ManageProjectsController {
 
         HBox row = new HBox(8, nameField, afasCodeField, billableCheckBox);
         projectsContainer.getChildren().add(row);
+    }
+
+    public void reInitialize() {
+        projectsContainer.getChildren().clear();
+        ProjectsService.getInstance().getProjects().forEach(this::addRow);
     }
 
 }
