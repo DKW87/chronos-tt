@@ -11,8 +11,6 @@ import javafx.scene.layout.VBox;
 
 public class ManageProjectsController {
 
-    private static final long NO_ID = -1L;
-
     @FXML
     private VBox projectsContainer;
 
@@ -23,8 +21,7 @@ public class ManageProjectsController {
 
     @FXML
     private void addNewRow() {
-        Project defaultProject = Project.defaults();
-        defaultProject.setId(NO_ID);
+        Project defaultProject = Project.empty();
         addRow(defaultProject);
     }
 
