@@ -97,6 +97,8 @@ public class TrackingService {
                     .get();
             today.getTimeEntries().remove(entry);
             entry.setEnd(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+            final long secondsWorked = ChronoUnit.SECONDS.between(entry.getStart(), entry.getEnd());
+            today.setSecondsWorked(today.getSecondsWorked() + secondsWorked);
             today.getTimeEntries().add(entry);
             LOG.info("Stopped tracking {} with id {}", entry.getProject().getName(), entry.getId());
         });
