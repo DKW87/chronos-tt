@@ -3,6 +3,7 @@ package com.github.dkw87.chronostt;
 import com.github.dkw87.chronostt.controller.ManageProjectsController;
 import com.github.dkw87.chronostt.controller.SettingsController;
 import com.github.dkw87.chronostt.controller.TrackingController;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -60,6 +61,7 @@ public class StageManager {
 
     private FXMLLoader constructSettingsStage() {
         settingsStage.initStyle(StageStyle.DECORATED);
+        settingsStage.setOnCloseRequest(e -> Platform.exit());
         settingsStage.setWidth(SETTINGS_STAGE_WIDTH);
         settingsStage.setHeight(SETTINGS_STAGE_HEIGHT);
         settingsStage.setResizable(false);
@@ -72,6 +74,7 @@ public class StageManager {
 
     private FXMLLoader constructTrackingStage() {
         trackingStage.initStyle(StageStyle.UNDECORATED);
+        trackingStage.setOnCloseRequest(e -> Platform.exit());
         trackingStage.setWidth(TRACKING_STAGE_WIDTH);
         trackingStage.setHeight(TRACKING_STAGE_HEIGHT);
         trackingStage.setResizable(false);
@@ -86,6 +89,10 @@ public class StageManager {
     private FXMLLoader constructManageProjectsStage() {
         manageProjectsStage.initStyle(StageStyle.DECORATED);
         manageProjectsStage.initModality(Modality.APPLICATION_MODAL);
+        manageProjectsStage.setOnCloseRequest(e -> {
+            e.consume();
+            hideManageProjectsView();
+        });
         manageProjectsStage.setWidth(MANAGE_PROJECTS_STAGE_WIDTH);
         manageProjectsStage.setHeight(MANAGE_PROJECTS_STAGE_HEIGHT);
         manageProjectsStage.setResizable(false);
