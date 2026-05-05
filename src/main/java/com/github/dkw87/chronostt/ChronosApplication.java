@@ -37,6 +37,8 @@ public class ChronosApplication extends Application {
                 CompletableFuture.runAsync(MemoryRepository::initialize, executor),
                 CompletableFuture.runAsync(TrackingService::initialize, executor)
         ).join();
+
+        executor.shutdown();
     }
 
     @Override
