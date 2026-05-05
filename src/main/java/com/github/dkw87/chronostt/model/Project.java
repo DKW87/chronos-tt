@@ -25,4 +25,14 @@ public class Project {
                 .build();
     }
 
+    public static Project empty() {
+        return Project.builder()
+                .id(-1L)
+                .name("")
+                .afasCode("")
+                .billable(false)
+                .deleted(false)
+                .build();
+    }
+
 }
