@@ -16,14 +16,15 @@
     </padding>
 
     <HBox spacing="8">
-        <Label text="Name"      prefWidth="150" style="-fx-font-weight: bold;"/>
-        <Label text="AFAS Code" prefWidth="100" style="-fx-font-weight: bold;"/>
-        <Label text="Billable"  prefWidth="60"  style="-fx-font-weight: bold;"/>
+        <Label text="Name"      prefWidth="170" style="-fx-font-weight: bold;"/>
+        <Label text="AFAS Code" prefWidth="75" style="-fx-font-weight: bold;"/>
+        <Label text="Billable"  prefWidth="50"  style="-fx-font-weight: bold;"/>
+        <Label text="Delete"    prefWidth="50"  style="-fx-font-weight: bold;"/>
     </HBox>
 
     <Separator/>
 
-    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" hbarPolicy="NEVER">
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" hbarPolicy="NEVER" vbarPolicy="ALWAYS">
         <VBox fx:id="projectsContainer" spacing="6">
             <padding>
                 <Insets top="4" right="4" bottom="4" left="0"/>
