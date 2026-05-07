@@ -65,13 +65,13 @@ public class ManageProjectsController {
         }
 
         if (projects.stream().anyMatch(p -> p.getAfasCode() == null || p.getAfasCode().isEmpty() || p.getAfasCode().isBlank())) {
-            final String invalidAfasCodeMessage = "AfasCode is required and cannot be empty. ";
+            final String invalidAfasCodeMessage = "For each project an AfasCode is required and cannot be empty. ";
             LOG.warn("Project did not contain an AfasCode");
             builder.append(invalidAfasCodeMessage);
         }
 
         if (projects.stream().anyMatch(p -> p.getName() == null || p.getName().isEmpty() || p.getName().isBlank())) {
-            final String invalidNameMessage = "Name is required and cannot be empty. ";
+            final String invalidNameMessage = "For each project a Name is required and cannot be empty. ";
             LOG.warn("Project did not contain a Name");
             builder.append(invalidNameMessage);
         }
