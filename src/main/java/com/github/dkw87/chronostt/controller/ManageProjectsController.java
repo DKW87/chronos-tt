@@ -12,6 +12,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.util.List;
+
 public class ManageProjectsController {
 
     private static final String DELETE_ICON = "mdi2t-trash-can-outline";
@@ -36,7 +38,54 @@ public class ManageProjectsController {
     }
 
     @FXML
-    private void saveProjects() {}
+    private void saveProjects() {
+        final List<Project> projects = projectsContainer.getChildren().stream()
+                .map(node -> mapRowToProject((HBox) node))
+                .toList();
+
+        if (invalidProjects(projects)) {
+            // error log
+            // show popup
+            return;
+        }
+
+    }
+
+    private boolean invalidProjects(List<Project> projects) {
+        boolean invalid = false;
+
+        if (projects.isEmpty()) {
+            // cannot be empty warn
+            invalid = true;
+        }
+
+        if (projects.stream().anyMatch(p -> p.getAfasCode() == null || p.getAfasCode().isEmpty() || p.getAfasCode().isBlank())) {
+            // must have input warn
+            invalid = true;
+        }
+
+        if (projects.stream().anyMatch(p -> p.getName() == null || p.getName().isEmpty() || p.getName().isBlank())) {
+            // must have input warn
+            invalid = true;
+        }
+
+        return invalid;
+    }
+
+    private Project mapRowToProject(HBox row) {
+        TextField nameField = (TextField) row.getChildren().get(0);
+        TextField afasCodeField = (TextField) row.getChildren().get(1);
+        HBox billableWrapper = (HBox) row.getChildren().get(2);
+        CheckBox billableCheckBox  = (CheckBox) billableWrapper.getChildren().getFirst();
+
+        return Project.builder()
+                .id((Long) row.getUserData())
+                .name(nameField.getText())
+                .afasCode(afasCodeField.getText())
+                .billable(billableCheckBox.isSelected())
+                .deleted(false)
+                .build();
+    }
 
     private void addRow(Project project) {
         TextField nameField = new TextField(project.getName());
