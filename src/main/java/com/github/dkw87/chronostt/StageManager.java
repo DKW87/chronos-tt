@@ -26,7 +26,7 @@ public class StageManager {
     private static final int SETTINGS_STAGE_HEIGHT = 410;
     private static final int TRACKING_STAGE_WIDTH = 300;
     private static final int TRACKING_STAGE_HEIGHT = 50;
-    private static final int MANAGE_PROJECTS_STAGE_WIDTH = 350;
+    private static final int MANAGE_PROJECTS_STAGE_WIDTH = 400;
     private static final int MANAGE_PROJECTS_STAGE_HEIGHT = 500;
 
     // stage titles
