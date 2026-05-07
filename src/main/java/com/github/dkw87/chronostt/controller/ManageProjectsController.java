@@ -62,6 +62,7 @@ public class ManageProjectsController {
         iconWrapper.setAlignment(Pos.BASELINE_CENTER);
 
         HBox row = new HBox(8, nameField, afasCodeField, checkboxWrapper, iconWrapper);
+        row.setUserData(project.getId());
         deleteIcon.setOnMouseClicked(e -> projectsContainer.getChildren().remove(row));
         projectsContainer.getChildren().add(row);
     }
