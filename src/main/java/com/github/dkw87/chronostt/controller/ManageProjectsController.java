@@ -5,6 +5,7 @@ import com.github.dkw87.chronostt.model.Project;
 import com.github.dkw87.chronostt.service.ProjectsService;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -54,6 +55,7 @@ public class ManageProjectsController {
         FontIcon deleteIcon = new FontIcon();
         deleteIcon.setIconLiteral(DELETE_ICON);
         deleteIcon.setIconSize(20);
+        deleteIcon.setCursor(Cursor.HAND);
 
         HBox iconWrapper = new HBox(deleteIcon);
         iconWrapper.setPrefWidth(60);
