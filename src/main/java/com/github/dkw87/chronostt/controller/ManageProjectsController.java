@@ -13,6 +13,8 @@ import org.kordamp.ikonli.javafx.FontIcon;
 
 public class ManageProjectsController {
 
+    private static final String DELETE_ICON = "mdi2t-trash-can-outline";
+
     @FXML
     private VBox projectsContainer;
 
@@ -50,7 +52,7 @@ public class ManageProjectsController {
         checkboxWrapper.setAlignment(Pos.BASELINE_CENTER);
 
         FontIcon deleteIcon = new FontIcon();
-        deleteIcon.setIconLiteral("mdi2t-trash-can-outline");
+        deleteIcon.setIconLiteral(DELETE_ICON);
         deleteIcon.setIconSize(20);
 
         HBox iconWrapper = new HBox(deleteIcon);
