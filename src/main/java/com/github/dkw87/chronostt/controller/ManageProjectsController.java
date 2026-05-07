@@ -11,11 +11,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.kordamp.ikonli.javafx.FontIcon;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class ManageProjectsController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(ManageProjectsController.class);
     private static final String DELETE_ICON = "mdi2t-trash-can-outline";
 
     @FXML
@@ -43,7 +46,8 @@ public class ManageProjectsController {
                 .map(node -> mapRowToProject((HBox) node))
                 .toList();
 
-        if (invalidProjects(projects)) {
+        final String message = getValidationMessage(projects);
+        if (message != null) {
             // error log
             // show popup
             return;
@@ -51,25 +55,30 @@ public class ManageProjectsController {
 
     }
 
-    private boolean invalidProjects(List<Project> projects) {
-        boolean invalid = false;
+    private String getValidationMessage(List<Project> projects) {
+        final StringBuilder builder = new StringBuilder();
 
         if (projects.isEmpty()) {
-            // cannot be empty warn
-            invalid = true;
+            final String emptyMessage = "At least one project is required. ";
+            LOG.warn("There were no projects to validate");
+            return builder.append(emptyMessage).toString();
         }
 
         if (projects.stream().anyMatch(p -> p.getAfasCode() == null || p.getAfasCode().isEmpty() || p.getAfasCode().isBlank())) {
-            // must have input warn
-            invalid = true;
+            final String invalidAfasCodeMessage = "AfasCode is required and cannot be empty. ";
+            LOG.warn("Project did not contain an AfasCode");
+            builder.append(invalidAfasCodeMessage);
         }
 
         if (projects.stream().anyMatch(p -> p.getName() == null || p.getName().isEmpty() || p.getName().isBlank())) {
-            // must have input warn
-            invalid = true;
+            final String invalidNameMessage = "Name is required and cannot be empty. ";
+            LOG.warn("Project did not contain a Name");
+            builder.append(invalidNameMessage);
         }
 
-        return invalid;
+        return builder.toString().isEmpty()
+                ? null
+                : builder.toString();
     }
 
     private Project mapRowToProject(HBox row) {
