@@ -56,6 +56,8 @@ public class ManageProjectsController {
 
         if (hasInvalidProjects(projects)) return;
 
+        ProjectsService.getInstance().storeProjects(projects);
+        StageManager.getInstance().hideManageProjectsView();
     }
 
     private boolean hasInvalidProjects(List<Project> projects) {
