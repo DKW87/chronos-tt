@@ -1,7 +1,6 @@
 package com.github.dkw87.chronostt.service;
 
 import com.github.dkw87.chronostt.model.Project;
-import com.github.dkw87.chronostt.model.Settings;
 import com.github.dkw87.chronostt.repository.memory.MemoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
