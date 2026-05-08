@@ -6,6 +6,7 @@ import com.github.dkw87.chronostt.service.ProjectsService;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -46,13 +47,22 @@ public class ManageProjectsController {
                 .map(node -> mapRowToProject((HBox) node))
                 .toList();
 
+        if (hasInvalidProjects(projects)) return;
+
+    }
+
+    private boolean hasInvalidProjects(List<Project> projects) {
         final String message = getValidationMessage(projects);
         if (message != null) {
             // error log
-            // show popup
-            return;
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Could not validate projects");
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.show();
+            return true;
         }
-
+        return false;
     }
 
     private String getValidationMessage(List<Project> projects) {
