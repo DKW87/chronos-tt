@@ -24,7 +24,7 @@ public class ManageProjectsController {
     private static final String ALERT_TITLE = "Validation failed";
 
     private static final String MESSAGE_EMPTY = "At least one project is required.";
-    private static final String FORMATTED_MESSAGE = "For each project %s is required and cannot be empty";
+    private static final String FORMATTED_MESSAGE = "For each project %s is required and cannot be empty.";
     private static final String AFAS_CODE = "an AFAS code";
     private static final String PROJECT_NAME = "a name";
     private static final String AND = " and ";
