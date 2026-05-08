@@ -57,6 +57,7 @@ public class ManageProjectsController {
         if (hasInvalidProjects(projects)) return;
 
         ProjectsService.getInstance().storeProjects(projects);
+        StageManager.getInstance().getSettingsController().reinitProjectComboBox(projects);
         StageManager.getInstance().hideManageProjectsView();
     }
 

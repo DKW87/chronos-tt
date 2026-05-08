@@ -11,6 +11,7 @@ import javafx.util.StringConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -185,6 +186,11 @@ public class SettingsController {
     public void setProjectComboBox(Project project) {
         projectComboBox.setValue(project);
         SettingsService.getInstance().storeLastTrackedProject(project);
+    }
+
+    public void reinitProjectComboBox(List<Project> projects) {
+        projectComboBox.getItems().setAll(projects);
+        projectComboBox.setValue(SettingsService.getInstance().getLastTrackedProject());
     }
 
 }
