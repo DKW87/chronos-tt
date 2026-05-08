@@ -225,6 +225,15 @@ public class MemoryRepository {
         }
     }
 
+    public long getIncrementedProjectId() {
+        lock.readLock().lock();
+        try {
+            return PROJECT_ID.incrementAndGet();
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
+
     public void stop() {
         LOG.info("{} shutting down...", CLASS_NAME);
         queue.add(SHUTDOWN_TASK);
