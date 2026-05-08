@@ -61,7 +61,7 @@ public class ManageProjectsController {
     private boolean hasInvalidProjects(List<Project> projects) {
         final String message = getValidationMessage(projects);
         if (message != null) {
-            // error log
+            LOG.error("Projects could not be validated");
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle(ALERT_TITLE);
             alert.setHeaderText(null);
