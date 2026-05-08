@@ -21,6 +21,13 @@ public class ManageProjectsController {
 
     private static final Logger LOG = LoggerFactory.getLogger(ManageProjectsController.class);
     private static final String DELETE_ICON = "mdi2t-trash-can-outline";
+    private static final String ALERT_TITLE = "Validation failed";
+
+    private static final String MESSAGE_EMPTY = "At least one project is required.";
+    private static final String FORMATTED_MESSAGE = "For each project %s is required and cannot be empty";
+    private static final String AFAS_CODE = "an AFAS code";
+    private static final String PROJECT_NAME = "a name";
+    private static final String AND = " and ";
 
     @FXML
     private VBox projectsContainer;
@@ -56,7 +63,7 @@ public class ManageProjectsController {
         if (message != null) {
             // error log
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Could not validate projects");
+            alert.setTitle(ALERT_TITLE);
             alert.setHeaderText(null);
             alert.setContentText(message);
             alert.show();
@@ -66,29 +73,31 @@ public class ManageProjectsController {
     }
 
     private String getValidationMessage(List<Project> projects) {
-        final StringBuilder builder = new StringBuilder();
 
         if (projects.isEmpty()) {
-            final String emptyMessage = "At least one project is required. ";
             LOG.warn("There were no projects to validate");
-            return builder.append(emptyMessage).toString();
+            return MESSAGE_EMPTY;
+        }
+
+        final StringBuilder builder = new StringBuilder();
+
+        if (projects.stream().anyMatch(p -> p.getName() == null || p.getName().isEmpty() || p.getName().isBlank())) {
+            LOG.warn("Project did not contain a Name");
+            builder.append(PROJECT_NAME);
         }
 
         if (projects.stream().anyMatch(p -> p.getAfasCode() == null || p.getAfasCode().isEmpty() || p.getAfasCode().isBlank())) {
-            final String invalidAfasCodeMessage = "For each project an AfasCode is required and cannot be empty. ";
-            LOG.warn("Project did not contain an AfasCode");
-            builder.append(invalidAfasCodeMessage);
-        }
-
-        if (projects.stream().anyMatch(p -> p.getName() == null || p.getName().isEmpty() || p.getName().isBlank())) {
-            final String invalidNameMessage = "For each project a Name is required and cannot be empty. ";
-            LOG.warn("Project did not contain a Name");
-            builder.append(invalidNameMessage);
+            LOG.warn("Project did not contain an afasCode");
+            if (builder.isEmpty()) {
+                builder.append(AFAS_CODE);
+            } else {
+                builder.append(AND + AFAS_CODE);
+            }
         }
 
         return builder.toString().isEmpty()
                 ? null
-                : builder.toString();
+                : String.format(FORMATTED_MESSAGE, builder);
     }
 
     private Project mapRowToProject(HBox row) {
