@@ -19,7 +19,7 @@ public class Project {
         return Project.builder()
                 .id(1L)
                 .name("CHANGE-ME")
-                .afasCode("")
+                .afasCode("1234567")
                 .billable(false)
                 .deleted(false)
                 .build();
