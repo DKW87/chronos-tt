@@ -3,6 +3,7 @@ package com.github.dkw87.chronostt.controller;
 import com.github.dkw87.chronostt.StageManager;
 import com.github.dkw87.chronostt.model.Project;
 import com.github.dkw87.chronostt.service.ProjectsService;
+import com.github.dkw87.chronostt.service.SettingsService;
 import com.github.dkw87.chronostt.service.TrackingService;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -87,6 +88,10 @@ public class TrackingController {
 
     public void setProjectToTrack(Project project) {
         projectComboBox.setValue(project);
+    }
+
+    public void reinitProjectComboBox(List<Project> projects) {
+        projectComboBox.getItems().setAll(projects);
     }
 
 }

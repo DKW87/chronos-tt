@@ -58,6 +58,7 @@ public class ManageProjectsController {
 
         ProjectsService.getInstance().storeProjects(projects);
         StageManager.getInstance().getSettingsController().reinitProjectComboBox(projects);
+        StageManager.getInstance().getTrackingController().reinitProjectComboBox(projects);
         StageManager.getInstance().hideManageProjectsView();
     }
 
