@@ -24,10 +24,7 @@ public class ManageProjectsController {
     private static final String ALERT_TITLE = "Validation failed";
 
     private static final String MESSAGE_EMPTY = "At least one project is required.";
-    private static final String FORMATTED_MESSAGE = "For each project %s is required and cannot be empty.";
-    private static final String AFAS_CODE = "an AFAS code";
-    private static final String PROJECT_NAME = "a name";
-    private static final String AND = " and ";
+    private static final String MESSAGE_NAME = "For each project a name is required and cannot be empty.";
 
     @FXML
     private VBox projectsContainer;
@@ -78,29 +75,19 @@ public class ManageProjectsController {
     private String getValidationMessage(List<Project> projects) {
 
         if (projects.isEmpty()) {
-            LOG.warn("There were no projects to validate");
+            LOG.warn("No project(s) to validate");
             return MESSAGE_EMPTY;
         }
 
-        final StringBuilder builder = new StringBuilder();
+        final boolean noName = projects.stream()
+                .anyMatch(p -> p.getName() == null || p.getName().isEmpty() || p.getName().isBlank());
 
-        if (projects.stream().anyMatch(p -> p.getName() == null || p.getName().isEmpty() || p.getName().isBlank())) {
-            LOG.warn("Project did not contain a Name");
-            builder.append(PROJECT_NAME);
+        if (noName) {
+            LOG.warn("Project(s) did not contain a Name");
+            return MESSAGE_NAME;
         }
 
-        if (projects.stream().anyMatch(p -> p.getAfasCode() == null || p.getAfasCode().isEmpty() || p.getAfasCode().isBlank())) {
-            LOG.warn("Project did not contain an afasCode");
-            if (builder.isEmpty()) {
-                builder.append(AFAS_CODE);
-            } else {
-                builder.append(AND + AFAS_CODE);
-            }
-        }
-
-        return builder.toString().isEmpty()
-                ? null
-                : String.format(FORMATTED_MESSAGE, builder);
+        return null;
     }
 
     private Project mapRowToProject(HBox row) {
