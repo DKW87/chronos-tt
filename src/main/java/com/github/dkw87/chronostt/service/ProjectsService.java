@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ProjectsService {
 
@@ -22,6 +23,15 @@ public class ProjectsService {
                 project.setId(MemoryRepository.getInstance().getIncrementedProjectId());
             }
         });
+
+        final Project storedTracked = SettingsService.getInstance().getLastTrackedProject();
+        final Project newTracked = projects.stream()
+                .filter(project -> Objects.equals(project.getId(), storedTracked.getId())).findFirst().get();
+
+        if (storedTracked != newTracked) {
+            SettingsService.getInstance().storeLastTrackedProject(newTracked);
+        }
+
         MemoryRepository.getInstance().submitProjects(projects);
     }
 
