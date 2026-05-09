@@ -3,6 +3,7 @@ package com.github.dkw87.chronostt.controller;
 import com.github.dkw87.chronostt.StageManager;
 import com.github.dkw87.chronostt.model.Project;
 import com.github.dkw87.chronostt.service.ProjectsService;
+import com.github.dkw87.chronostt.service.SettingsService;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -21,10 +22,12 @@ public class ManageProjectsController {
 
     private static final Logger LOG = LoggerFactory.getLogger(ManageProjectsController.class);
     private static final String DELETE_ICON = "mdi2t-trash-can-outline";
-    private static final String ALERT_TITLE = "Validation failed";
+    private static final String VALIDATION_ALERT_TITLE = "Validation failed";
+    private static final String DELETE_ALERT_TITLE = "Delete failed";
 
     private static final String MESSAGE_EMPTY = "At least one project is required.";
     private static final String MESSAGE_NAME = "For each project a name is required and cannot be empty.";
+    private static final String MESSAGE_DELETE = "This project cannot be deleted because it is being tracked.";
 
     @FXML
     private VBox projectsContainer;
@@ -63,7 +66,7 @@ public class ManageProjectsController {
         if (message != null) {
             LOG.error("Projects could not be validated");
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle(ALERT_TITLE);
+            alert.setTitle(VALIDATION_ALERT_TITLE);
             alert.setHeaderText(null);
             alert.setContentText(message);
             alert.show();
@@ -130,8 +133,25 @@ public class ManageProjectsController {
 
         HBox row = new HBox(8, nameField, afasCodeField, checkboxWrapper, iconWrapper);
         row.setUserData(project.getId());
-        deleteIcon.setOnMouseClicked(e -> projectsContainer.getChildren().remove(row));
+        deleteIcon.setOnMouseClicked(e -> deleteRow(row));
         projectsContainer.getChildren().add(row);
+    }
+
+    private void deleteRow(HBox row) {
+        final boolean isActiveProject = SettingsService.getInstance().getLastTrackedProject().getId().equals(row.getUserData());
+        final boolean showsTrackingStage = StageManager.getInstance().getTrackingStage().isShowing();
+
+        if (showsTrackingStage && isActiveProject) {
+            LOG.warn("Cannot delete project because it is being tracked");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle(DELETE_ALERT_TITLE);
+            alert.setHeaderText(null);
+            alert.setContentText(MESSAGE_DELETE);
+            alert.show();
+            return;
+        }
+
+        projectsContainer.getChildren().remove(row);
     }
 
     public void reInitialize() {
