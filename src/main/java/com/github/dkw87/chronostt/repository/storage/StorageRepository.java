@@ -36,8 +36,8 @@ public class StorageRepository {
 
     private final BlockingQueue<Runnable> queue;
     private final ObjectMapper objectMapper;
-    
-    private StorageRepository(){
+
+    private StorageRepository() {
         LOG.info("Initializing {}...", CLASS_NAME);
         createAppDir();
         queue = new LinkedBlockingQueue<>();
@@ -197,7 +197,7 @@ public class StorageRepository {
     }
 
     public void saveTrackedDays(List<DayEntry> days, SaveMethod method) {
-        if  (method == SaveMethod.ASYNCHRONOUS) {
+        if (method == SaveMethod.ASYNCHRONOUS) {
             queue.add(() -> persistTrackedDays(days));
             return;
         }
@@ -232,5 +232,5 @@ public class StorageRepository {
     private static class SingletonHolder {
         private static final StorageRepository INSTANCE = new StorageRepository();
     }
-    
+
 }

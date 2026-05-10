@@ -98,7 +98,7 @@ public class ManageProjectsController {
         TextField nameField = (TextField) row.getChildren().get(0);
         TextField afasCodeField = (TextField) row.getChildren().get(1);
         HBox billableWrapper = (HBox) row.getChildren().get(2);
-        CheckBox billableCheckBox  = (CheckBox) billableWrapper.getChildren().getFirst();
+        CheckBox billableCheckBox = (CheckBox) billableWrapper.getChildren().getFirst();
 
         return Project.builder()
                 .id((Long) row.getUserData())

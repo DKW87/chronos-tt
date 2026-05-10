@@ -46,7 +46,7 @@ public class TrackingService {
                     if (queue.peek() == null) {
                         submitTrackingData();
                     }
-                } catch (InterruptedException e){
+                } catch (InterruptedException e) {
                     LOG.error("{} interrupted, {} tasks left in queue - attempting to store today's tracking data",
                             THREAD_NAME, queue.size(), e);
                     Thread.currentThread().interrupt();
@@ -125,5 +125,5 @@ public class TrackingService {
     private static class SingletonHolder {
         private static final TrackingService INSTANCE = new TrackingService();
     }
-    
+
 }

@@ -80,7 +80,7 @@ public class SettingsController {
     @FXML
     private void startTracking() {
         final Project project = projectComboBox.getSelectionModel().getSelectedItem();
-        if (project == null)  {
+        if (project == null) {
             LOG.warn("No project selected");
             return;
         }

@@ -67,7 +67,7 @@ public class StageManager {
         settingsStage.setResizable(false);
         settingsStage.setTitle(SETTINGS_STAGE_TITLE);
 
-        final FXMLLoader loader = getScene(SETTINGS_STAGE_FXML,  settingsStage);
+        final FXMLLoader loader = getScene(SETTINGS_STAGE_FXML, settingsStage);
         LOG.info("SettingsStage constructed");
         return loader;
     }
@@ -81,7 +81,7 @@ public class StageManager {
         trackingStage.setAlwaysOnTop(true);
         trackingStage.setTitle(TRACKING_STAGE_TITLE);
 
-        final FXMLLoader loader = getScene(TRACKING_STAGE_FXML,  trackingStage);
+        final FXMLLoader loader = getScene(TRACKING_STAGE_FXML, trackingStage);
         LOG.info("TrackingStage constructed");
         return loader;
     }
@@ -99,7 +99,7 @@ public class StageManager {
         manageProjectsStage.setResizable(false);
         manageProjectsStage.setTitle(MANAGE_PROJECTS_STAGE_TITLE);
 
-        final FXMLLoader loader = getScene(MANAGE_PROJECTS_STAGE_FXML,  manageProjectsStage);
+        final FXMLLoader loader = getScene(MANAGE_PROJECTS_STAGE_FXML, manageProjectsStage);
         LOG.info("ManageProjectsStage constructed");
         return loader;
     }

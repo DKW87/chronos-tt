@@ -79,5 +79,5 @@ public class SettingsService {
     private static class SingletonHolder {
         private static final SettingsService INSTANCE = new SettingsService();
     }
-    
+
 }

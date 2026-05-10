@@ -42,5 +42,5 @@ public class ProjectsService {
     private static class SingletonHolder {
         private static final ProjectsService INSTANCE = new ProjectsService();
     }
-    
+
 }
